@@ -21,6 +21,12 @@
             % endfor
         % endif
 
+        % if 'module_js' in assets_env:
+            % for url in assets_env['module_js']:
+        <script type="module" src="${url}"></script>
+            % endfor
+        % endif
+
         % if 'top_js' in assets_env:
             % for url in assets_env['top_js']:
         <script src="${url}"></script>
@@ -28,21 +34,19 @@
         % endif
     </head>
     <body>
-        <!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser.
-            Please <a href="https://browsehappy.com/">upgrade your browser</a>
-            to improve your experience and security.</p>
-        <![endif]-->
-
         <div id="loading-message"
             style="border: 1px solid blue; margin: 1em; padding: 2em; background-color: #f8f1fd;">
             <strong>Loading application. Wait please...</strong>
         </div>
+
+        <!--  z-index 2 and 3 busy by login form -->
+        <div style="z-index:1;" id="gui_canvas"></div>
 
     % if 'bottom_js' in assets_env:
         % for url in assets_env['bottom_js']:
         <script src="${url}"></script>
         % endfor
     % endif
+
     </body>
 </html>
