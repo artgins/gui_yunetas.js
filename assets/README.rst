@@ -18,6 +18,17 @@ And to install the new versions::
 
     npm install
 
+
+Errors
+------
+
+in jsoneditor/themes/defaults.scss remove the last 90::
+
+    $search-match-background-color: var(--jse-search-match-background-color, #99ff7780);
+
+    $search-match-background-color: var(--jse-search-match-background-color, #99ff77);
+
+
 Depedencies
 -----------
 
