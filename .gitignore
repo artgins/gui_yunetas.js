@@ -8,3 +8,4 @@ debug/
 .idea/
 .webassets-cache/
 .cache/
+node_modules/
