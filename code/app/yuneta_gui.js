@@ -224,107 +224,6 @@
         );
 
         //gobj_ka_main.get_main_layer().draw();
-
-        if(0) { // TODO TEST
-            self.yuno.gobj_create(
-                "test",
-                Ka_button,
-                {
-                    id: "Pepe",
-                    action: "EV_TEST",
-                    x: 200,
-                    y: 250,
-                    height: 350,
-                    width: 350,
-                    label: "Hola cómo estás?\nBien, gracias",
-                    icon: "\uEA01",
-                    icon_position: "left",
-                    draggable: true,
-                    quick_display: false,
-                    autosize: true,
-                    background_color: "white",
-
-                    kw_border_shape: {
-                        strokeWidth: 2
-                    },
-                    kw_text_font_properties: {
-                    },
-                    kw_icon_font_properties: {
-                    }
-                },
-                self.config.gobj_gf_agents
-            );
-
-            let icons = "";
-            for(let i=0; i<60; i++) {
-                let icon = sprintf("%c", yuneta_icon_font["chevron-right"]);
-                icons += icon;
-            }
-            self.yuno.gobj_create(
-                "test",
-                Ka_button,
-                {
-                    layer: gobj_ka_main.get_static_layer(),
-                    action: "EV_TEST",
-                    x: 100,
-                    y: 100,
-                    height: 50,
-                    width: 150,
-                    // label: "Hola cómo estás?\nBien, gracias",
-                    icon: icons,
-                    icon_position: "left",
-                    draggable: true, // TODO quita
-                    quick_display: true, // TODO quita
-                    autosize: true,
-
-                    kw_text_font_properties: {
-                    },
-                    kw_icon_font_properties: {
-                    },
-                    kw_border_shape: { /* Border shape */
-                        strokeWidth: 1
-                    }
-                },
-                self.config.gobj_gf_agents
-            );
-
-            icons = "";
-            for(let c in yuneta_icon_font) {
-                if (yuneta_icon_font.hasOwnProperty(c)) {
-                    let icon = sprintf("%c", yuneta_icon_font[c]);
-                    icons += icon;
-                }
-            }
-
-            self.yuno.gobj_create(
-                "test",
-                Ka_button,
-                {
-                    layer: gobj_ka_main.get_static_layer(),
-                    action: "EV_TEST",
-                    x: 100,
-                    y: 200,
-                    height: 50,
-                    width: 150,
-                    // label: "Hola cómo estás?\nBien, gracias",
-                    icon: icons,
-                    icon_position: "left",
-                    draggable: true, // TODO quita
-                    quick_display: true, // TODO quita
-                    autosize: true,
-
-                    kw_text_font_properties: {
-                    },
-                    kw_icon_font_properties: {
-                    },
-                    kw_border_shape: { /* Border shape */
-                        strokeWidth: 1
-                    }
-                },
-                self.config.gobj_gf_agents
-            );
-            gobj_ka_main.get_main_layer().draw();
-        }
     }
 
 
@@ -381,7 +280,7 @@
     }
 
     /********************************************
-     *
+     *  From login.js
      ********************************************/
     function ac_login_accepted(self, event, kw, src)
     {
@@ -450,9 +349,26 @@
     }
 
     /********************************************
-     *
+     *  From login.js
      ********************************************/
     function ac_login_denied(self, event, kw, src)
+    {
+        close_all(self);
+        return 0;
+    }
+
+    /********************************************
+     *  From login.js
+     ********************************************/
+    function ac_login_refreshed(self, event, kw, src)
+    {
+        return 0;
+    }
+
+    /********************************************
+     *  From login.js
+     ********************************************/
+    function ac_logout_done(self, event, kw, src)
     {
         close_all(self);
         return 0;
@@ -462,23 +378,6 @@
      *  Refused identity_card
      ********************************************/
     function ac_id_refused(self, event, kw, src)
-    {
-        close_all(self);
-        return 0;
-    }
-
-    /********************************************
-     *
-     ********************************************/
-    function ac_login_refreshed(self, event, kw, src)
-    {
-        return 0;
-    }
-
-    /********************************************
-     *
-     ********************************************/
-    function ac_logout_done(self, event, kw, src)
     {
         close_all(self);
         return 0;
@@ -537,7 +436,8 @@
             "EV_LOGIN_REFRESHED",
             "EV_LOGIN_DENIED",
             "EV_LOGOUT_DONE",
-            "EV_RESIZE"
+            "EV_RESIZE",
+            "EV_DO_LOGOUT: output"
         ],
         "state_list": [
             "ST_IDLE"
