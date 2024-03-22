@@ -3,7 +3,7 @@
  *
  *          Root gobj __yuno__
  *
- *          Copyright (c) 2024, Artgins
+ *          Copyright (c) 2024, ArtGins.
  *          All Rights Reserved.
  ***********************************************************************/
 (function(exports) {

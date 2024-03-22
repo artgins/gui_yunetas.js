@@ -4,7 +4,7 @@
  *          Manage user login/logout
  *          v 1.0 with keycloak
  *
- *          Copyright (c) 2022 Niyamaka.
+ *          Copyright (c) 2022, ArtGins.
  *          All Rights Reserved.
  *
  ***********************************************************************/
