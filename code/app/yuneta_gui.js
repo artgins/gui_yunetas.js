@@ -182,46 +182,46 @@
             self
         );
 
-        self.config.gobj_ui_header = self.yuno.gobj_create(
-            "ui_header",
-            Ui_header,
-            {
-                layer: gobj_ka_main.get_static_layer(),
-                x: 0,
-                y: 0,
-                width: gobj_ka_main.config.width,
-                height: self.config.header_size,
-                icon_size: 30,
-                text_size: 20
-            },
-            self
-        );
-        gobj_ka_main.get_static_layer().draw();
-
-        self.config.gobj_mw_work_area = self.yuno.gobj_create(
-            "mw_work_area",
-            Sw_multiview,
-            {
-                layer: gobj_ka_main.get_main_layer(),
-                x: 0,
-                y: self.config.header_size,
-                width: gobj_ka_main.config.width,
-                height: gobj_ka_main.config.height - self.config.header_size
-            },
-            self
-        );
-
-        self.config.gobj_gf_agents = self.yuno.gobj_create_service(
-            "gf_agents",
-            Gf_agent,
-            {
-                layer: gobj_ka_main.get_main_layer(),
-                background_color: "#222B45",    // Uncomment to black theme
-                draggable: false,  // TODO pon a false en prod
-                gobj_mw_work_area: self.config.gobj_mw_work_area
-            },
-            self
-        );
+        // self.config.gobj_ui_header = self.yuno.gobj_create(
+        //     "ui_header",
+        //     Ui_header,
+        //     {
+        //         layer: gobj_ka_main.get_static_layer(),
+        //         x: 0,
+        //         y: 0,
+        //         width: gobj_ka_main.config.width,
+        //         height: self.config.header_size,
+        //         icon_size: 30,
+        //         text_size: 20
+        //     },
+        //     self
+        // );
+        // gobj_ka_main.get_static_layer().draw();
+        //
+        // self.config.gobj_mw_work_area = self.yuno.gobj_create(
+        //     "mw_work_area",
+        //     Sw_multiview,
+        //     {
+        //         layer: gobj_ka_main.get_main_layer(),
+        //         x: 0,
+        //         y: self.config.header_size,
+        //         width: gobj_ka_main.config.width,
+        //         height: gobj_ka_main.config.height - self.config.header_size
+        //     },
+        //     self
+        // );
+        //
+        // self.config.gobj_gf_agents = self.yuno.gobj_create_service(
+        //     "gf_agents",
+        //     Gf_agent,
+        //     {
+        //         layer: gobj_ka_main.get_main_layer(),
+        //         background_color: "#222B45",    // Uncomment to black theme
+        //         draggable: false,  // TODO pon a false en prod
+        //         gobj_mw_work_area: self.config.gobj_mw_work_area
+        //     },
+        //     self
+        // );
 
         //gobj_ka_main.get_main_layer().draw();
     }
@@ -229,9 +229,9 @@
 
 
 
-            /***************************
-             *      Actions
-             ***************************/
+                    /***************************
+                     *      Actions
+                     ***************************/
 
 
 
@@ -240,17 +240,25 @@
      *      Connected to yuneta
      *
      *  Example of kw (connection data of __remote_service__):
-         {
-             remote_yuno_name: "mlsol",
-             remote_yuno_role: "controlcenter",
-             remote_yuno_service: "wss-1",
-             services_roles: {
-                 controlcenter: ["root"],
-                 treedb_authzs: ["root"],
-                 treedb_controlcenter: ["root"]
-             },
-             url: "wss://localhost:1911"
-         }
+        {
+            "url": "wss://localhost:1996",
+            "remote_yuno_name": "pepe.com",
+            "remote_yuno_role": "controlcenter",
+            "remote_yuno_service": "wss-1",
+            "services_roles": {
+                "controlcenter": [
+                    "root"
+                ],
+                "treedb_controlcenter": [
+                    "root"
+                ],
+                "treedb_authzs": [
+                    "root"
+                ]
+            },
+            "data": null
+        }
+
      *
      ********************************************/
     function ac_on_open(self, event, kw, src)
@@ -260,19 +268,33 @@
          *----------------------------------------*/
         __yuno__["services_roles"] = kw.services_roles;
 
-        self.config.gobj_ui_header.gobj_send_event("EV_INFO_CONNECTED", kw, self);
-        self.config.gobj_gf_agents.gobj_send_event("EV_CONNECTED", {}, self);
+        self.gobj_publish_event(event, kw);
+
+        // TODO use publish_event
+        // self.config.gobj_ui_header.gobj_send_event("EV_INFO_CONNECTED", kw, self);
+        // self.config.gobj_gf_agents.gobj_send_event("EV_CONNECTED", {}, self);
 
         return 0;
     }
 
     /********************************************
      *  Disconnected from yuneta
+     *  Example of kw (disconnection data of __remote_service__):
+        {
+            "url": "wss://localhost:1996",
+            "remote_yuno_name": "konnectarte.com",
+            "remote_yuno_role": "controlcenter",
+            "remote_yuno_service": "wss-1"
+        }
+
      ********************************************/
     function ac_on_close(self, event, kw, src)
     {
-        self.config.gobj_ui_header.gobj_send_event("EV_INFO_DISCONNECTED", {}, self);
-        self.config.gobj_gf_agents.gobj_send_event("EV_DISCONNECTED", {}, self);
+        self.gobj_publish_event(event, kw);
+
+        // TODO use publish_event
+        // self.config.gobj_ui_header.gobj_send_event("EV_INFO_DISCONNECTED", {}, self);
+        // self.config.gobj_gf_agents.gobj_send_event("EV_DISCONNECTED", {}, self);
 
         self.clear_timeout();
 
@@ -389,30 +411,31 @@
      ********************************************/
     function ac_resize(self, event, kw, src)
     {
-        if(self.config.gobj_ui_header) {
-            self.config.gobj_ui_header.gobj_send_event(
-                event,
-                {
-                    x: 0,
-                    y: 0,
-                    height: self.config.header_size,
-                    width: kw.width,
-                },
-                self
-            );
-        }
-        if(self.config.gobj_mw_work_area) {
-            self.config.gobj_mw_work_area.gobj_send_event(
-                event,
-                {
-                    x: 0,
-                    y: self.config.header_size,
-                    width: kw.width,
-                    height: kw.height - self.config.header_size
-                },
-                self
-            );
-        }
+        // TODO use publish_event
+        // if(self.config.gobj_ui_header) {
+        //     self.config.gobj_ui_header.gobj_send_event(
+        //         event,
+        //         {
+        //             x: 0,
+        //             y: 0,
+        //             height: self.config.header_size,
+        //             width: kw.width,
+        //         },
+        //         self
+        //     );
+        // }
+        // if(self.config.gobj_mw_work_area) {
+        //     self.config.gobj_mw_work_area.gobj_send_event(
+        //         event,
+        //         {
+        //             x: 0,
+        //             y: self.config.header_size,
+        //             width: kw.width,
+        //             height: kw.height - self.config.header_size
+        //         },
+        //         self
+        //     );
+        // }
 
         return 0;
     }
@@ -420,24 +443,23 @@
 
 
 
-            /***************************
-             *      GClass/Machine
-             ***************************/
+                    /***************************
+                     *      GClass/Machine
+                     ***************************/
 
 
 
 
     let FSM = {
         "event_list": [
-            "EV_ON_OPEN",
-            "EV_ON_CLOSE",
+            "EV_ON_OPEN: output",
+            "EV_ON_CLOSE: output",
             "EV_IDENTITY_CARD_REFUSED",
             "EV_LOGIN_ACCEPTED",
             "EV_LOGIN_REFRESHED",
             "EV_LOGIN_DENIED",
             "EV_LOGOUT_DONE",
-            "EV_RESIZE",
-            "EV_DO_LOGOUT: output"
+            "EV_RESIZE: output"
         ],
         "state_list": [
             "ST_IDLE"
@@ -476,9 +498,9 @@
 
 
 
-            /***************************
-             *      Framework Methods
-             ***************************/
+                    /******************************
+                     *      Framework Methods
+                     ******************************/
 
 
 
