@@ -2,11 +2,9 @@
     'use strict';
 
     const urls = {
-        "localhost": "wss://localhost:1911",
-        "mulesol.yunetacontrol.com": "wss://mulesol.yunetacontrol.com:1911",
-        "mulesol.yunetacontrol.ovh": "wss://mulesol.yunetacontrol.ovh:1911",
-        "sfs.yunetacontrol.ovh": "wss://sfs.yunetacontrol.ovh:1911",
-        "sfs.yunetacontrol.com": "wss://sfs.yunetacontrol.com:1911"
+        "localhost": "wss://localhost:1996",
+        "konnectarte.yunetacontrol.com": "wss://konnectarte.yunetacontrol.com:1996",
+        "konnectarte.yunetacontrol.ovh": "wss://konnectarte.yunetacontrol.ovh:1997"
     };
 
     exports.urls = urls;

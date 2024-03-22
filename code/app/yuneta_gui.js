@@ -92,7 +92,7 @@
             self.config.url = window.location.hostname;
         }
 
-        // HACK punto gatillo: del fichero urls.js recupera la conexión ws/wss asociada a la url location.hostname
+        // HACK "punto gatillo" trigger point: from the urls.js file, retrieve the ws/wss connection associated with the url location.hostname
         let url = self.config.urls[self.config.url];
         if(empty_string(url)) {
             let msg = t("no url available for") + ":\n" + self.config.url;
@@ -237,7 +237,7 @@
                     height: 350,
                     width: 350,
                     label: "Hola cómo estás?\nBien, gracias",
-                    icon: "\u{EA01}",
+                    icon: "\uEA01",
                     icon_position: "left",
                     draggable: true,
                     quick_display: false,
@@ -290,28 +290,10 @@
 
             icons = "";
             for(let c in yuneta_icon_font) {
-                let icon = sprintf("%c", yuneta_icon_font[c]);
-                icons += icon;
-            }
-            for(let c in yuneta_icon_font) {
-                let icon = sprintf("%c", yuneta_icon_font[c]);
-                icons += icon;
-            }
-            for(let c in yuneta_icon_font) {
-                let icon = sprintf("%c", yuneta_icon_font[c]);
-                icons += icon;
-            }
-            for(let c in yuneta_icon_font) {
-                let icon = sprintf("%c", yuneta_icon_font[c]);
-                icons += icon;
-            }
-            for(let c in yuneta_icon_font) {
-                let icon = sprintf("%c", yuneta_icon_font[c]);
-                icons += icon;
-            }
-            for(let c in yuneta_icon_font) {
-                let icon = sprintf("%c", yuneta_icon_font[c]);
-                icons += icon;
+                if (yuneta_icon_font.hasOwnProperty(c)) {
+                    let icon = sprintf("%c", yuneta_icon_font[c]);
+                    icons += icon;
+                }
             }
 
             self.yuno.gobj_create(
