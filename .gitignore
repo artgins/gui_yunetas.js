@@ -10,3 +10,4 @@ debug/
 .cache/
 node_modules/
 out/
+platforms/

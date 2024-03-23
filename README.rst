@@ -75,6 +75,9 @@ Install ::
     npm install -g cordova
     cordova platform add android
 
+    curl -s "https://get.sdkman.io" | bash
+    sdk uninstall gradle 8.7
+
 Run ::
 
     cordova run android
