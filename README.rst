@@ -20,6 +20,10 @@ A skeleton based on:
     sudo pip3 install cssutils
     sudo pip3 install rjsmin
 
+.. warning:: Java version
+
+    Cordova needs java 11
+
 
 Electron
 =========
