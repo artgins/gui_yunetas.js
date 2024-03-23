@@ -42,6 +42,9 @@ Install ::
     npm install -g electron
     npm install -g electron-packager
 
+    npm install --save-dev @electron-forge/cli
+    npx electron-forge import
+
 Generate package::
 
     cd /yuneta/development/projects/^mulesol/mulesol-sistemas/projects/gpu/gui
