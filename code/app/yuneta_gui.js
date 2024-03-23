@@ -174,13 +174,21 @@
             self
         );
 
-        let gobj_ka_main = self.config.gobj_ka_main = self.yuno.gobj_create_service(
-            "__ka_main__",
-            Ka_main,
+        self.config.gobj_login = self.yuno.gobj_create_service(
+            "__layer__",
+            Layer,
             {
             },
             self
         );
+
+        // let gobj_ka_main = self.config.gobj_ka_main = self.yuno.gobj_create_service(
+        //     "__ka_main__",
+        //     Ka_main,
+        //     {
+        //     },
+        //     self
+        // );
 
         // self.config.gobj_ui_header = self.yuno.gobj_create(
         //     "ui_header",
