@@ -24,8 +24,8 @@ A skeleton based on:
 Electron
 =========
 
-Con electron-packager
----------------------
+Con electron-forge
+------------------
 
 Uninstall nodejs (system node)
 Install an updated version of node with::
@@ -42,7 +42,6 @@ Install ::
     npm install -g electron
     npm install -g @electron-forge/cli
 
-or::
     npm install --save-dev electron
     npm install --save-dev @electron-forge/cli
     npx electron-forge import
@@ -68,13 +67,19 @@ Execute in production with (after ``npm run deploy``) ::
     /yuneta/gui/gui_yunetas/gui_yunetas
 
 
+Cordova
+=======
+
+Install ::
+
+    npm install -g cordova
+    cordova platform add android
+
+Run ::
+
+    cordova run android
+
 License
--------
+=======
 
-Licensed under the  `The MIT License <http://www.opensource.org/licenses/mit-license>`_.
 See LICENSE.txt in the source distribution for details.
-
-
-TODO
-    "build": "electron-packager . --out=out --ignore=assets --overwrite",
-    "deploy": "killall -9 hannaik-gpu; rm -rf /yuneta/gui/hannaik-gpu; cp -a out/hannaik-gpu-linux-x64 /yuneta/gui/hannaik-gpu/",
