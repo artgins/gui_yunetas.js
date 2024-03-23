@@ -33,12 +33,12 @@ const createWindow = () => {
     mainWindow.loadURL(url);
 
     /*
-     *  Ctrl+Q para salir, Ctrl+Shift+I devtools, F11 fullscreen, Ctrl+M minimize
+     *  Ctrl+Q to quit, Ctrl+Shift+I devtools, F11 fullscreen, Ctrl+M minimize
      */
     // mainWindow.setAlwaysOnTop(true, "screen");      // TODO repon en prod
-    mainWindow.setMenuBarVisibility(false);         // TODO repon en prod
+    // mainWindow.setMenuBarVisibility(false);         // TODO repon en prod
     // mainWindow.maximize();
-    mainWindow.setFullScreen(true);                 // TODO repon en prod
+    // mainWindow.setFullScreen(true);                 // TODO repon en prod
     mainWindow.show();
 
     // Open the DevTools.

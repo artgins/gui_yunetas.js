@@ -2,21 +2,18 @@
   "name": "gui_yunetas",
   "productName": "gui_yunetas",
   "version": "1.0.0",
-  "description": "GUI of Hannaik GPU",
+  "description": "GUI of Yunetas",
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
-    "package": "electron-forge package",
+    "package": "electron-forge package --ignore=assets --overwrite",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-
-    "build": "electron-packager . --out=out --ignore=assets --overwrite",
-    "deploy": "killall -9 hannaik-gpu; rm -rf /yuneta/gui/hannaik-gpu; cp -a out/hannaik-gpu-linux-x64 /yuneta/gui/hannaik-gpu/",
-
+    "deploy": "killall -9 gui_yunetas; rm -rf /yuneta/gui/gui_yunetas; cp -a out/gui_yunetas-linux-x64 /yuneta/gui/gui_yunetas/",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "echo \"No linting configured\""
   },
-  "author": "Niyamaka",
+  "author": "ArtGins",
   "license": "see license in LICENSE.txt",
   "private": true,
   "keywords": [],
@@ -29,7 +26,7 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.3.1",
     "@electron-forge/plugin-fuses": "^7.3.1",
     "@electron/fuses": "^1.7.0",
-    "electron": "29.1.5"
+    "electron": "^29.1.5"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0"

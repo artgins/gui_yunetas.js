@@ -40,17 +40,17 @@ Install an updated version of node with::
 Install ::
 
     npm install -g electron
-    npm install -g electron-packager
+    npm install -g @electron-forge/cli
 
+or::
+    npm install --save-dev electron
     npm install --save-dev @electron-forge/cli
     npx electron-forge import
 
 Generate package::
 
-    cd /yuneta/development/projects/^mulesol/mulesol-sistemas/projects/gpu/gui
-
     npm install
-    npm run build
+    npm run make
     npm run deploy
 
 Execute in dev mode with ::
@@ -61,11 +61,11 @@ Execute in dev mode with ::
 
 Execute output exe with ::
 
-    out/hannaik-gpu-linux-x64/hannaik-gpu
+    out/gui_yunetas-linux-x64/gui_yunetas
 
 Execute in production with (after ``npm run deploy``) ::
 
-    /yuneta/gui/hannaik-gpu/hannaik-gpu
+    /yuneta/gui/gui_yunetas/gui_yunetas
 
 
 License
@@ -73,3 +73,8 @@ License
 
 Licensed under the  `The MIT License <http://www.opensource.org/licenses/mit-license>`_.
 See LICENSE.txt in the source distribution for details.
+
+
+TODO
+    "build": "electron-packager . --out=out --ignore=assets --overwrite",
+    "deploy": "killall -9 hannaik-gpu; rm -rf /yuneta/gui/hannaik-gpu; cp -a out/hannaik-gpu-linux-x64 /yuneta/gui/hannaik-gpu/",
