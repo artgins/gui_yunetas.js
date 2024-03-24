@@ -1,7 +1,7 @@
 /***********************************************************************
  *          gf_agents.js
  *
- *          Grafo principal de la GPU
+ *          Main GraFo of GPU
  *
  *          Copyright (c) 2023 Niyamaka.
  *          All Rights Reserved.

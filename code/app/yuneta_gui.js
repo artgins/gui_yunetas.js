@@ -28,6 +28,7 @@
         urls: urls,     // HACK urls is a global variable from urls.js,
 
         gobj_login: null,
+
         gobj_ka_main: null,
         gobj_ui_header: null,
         gobj_mw_work_area: null,
@@ -174,7 +175,7 @@
             self
         );
 
-        self.config.gobj_login = self.yuno.gobj_create_service(
+        self.config.gobj_layer = self.yuno.gobj_create_service(
             "__layer__",
             Layer,
             {
