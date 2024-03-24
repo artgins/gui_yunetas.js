@@ -20,11 +20,42 @@
         //////////////// Public Attributes //////////////////
         subscriber: null,       // subscriber of publishing messages
 
+        layers: [],             // layers
+            // layer: {
+            //     id: "",
+            //     description: "",
+            //     style: ""
+            // }
+
         timeout_retry: 5,       // timeout retry, in seconds
         timeout_idle: 5         // idle timeout, in seconds
 
         //////////////// Private Attributes /////////////////
     };
+
+
+
+
+                    /***************************
+                     *      Commands
+                     ***************************/
+
+
+
+
+    /********************************************
+     *
+     ********************************************/
+    function cmd_help(self, cmd, kw, src)
+    {
+        let webix = {
+            "result": 0,
+            "comment": "",
+            "schema": null,
+            "data": null
+        };
+        return webix;
+    }
 
 
 
@@ -125,6 +156,13 @@
         if(self.config.subscriber) {
             self.gobj_subscribe_event(null, {}, self.config.subscriber);
         }
+
+        for(let i=0; i<self.config.layers; i++) {
+            let layer = self.config.layers[i];
+            $("body").add(
+                sprintf("<div id='%s' style='%s'></div>", layer.id, layer.style)
+            );
+        }
     };
 
     /************************************************
@@ -168,8 +206,19 @@
     proto.mt_command = function(command, kw, src)
     {
         let self = this;
-
-        return {};
+        switch(command) {
+            case "help":
+                return cmd_help(self, command, kw, src);
+            default:
+                log_error(sprintf("Command not found: %s", command));
+                let webix = {
+                    "result": -1,
+                    "comment": sprintf("Command not found: %s", command),
+                    "schema": null,
+                    "data": null
+                };
+                return webix;
+        }
     };
 
 

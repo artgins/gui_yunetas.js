@@ -5,6 +5,7 @@
   "displayName": "GuiYunetas",
   "description": "GUI of Yunetas",
   "main": "main.js",
+  "homepage": "www",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package --ignore=assets --overwrite",

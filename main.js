@@ -37,12 +37,12 @@ const createWindow = () => {
      */
     // mainWindow.setAlwaysOnTop(true, "screen");      // TODO repon en prod
     // mainWindow.setMenuBarVisibility(false);         // TODO repon en prod
-    // mainWindow.maximize();
+    mainWindow.maximize();
     // mainWindow.setFullScreen(true);                 // TODO repon en prod
     mainWindow.show();
 
     // Open the DevTools.
-    //mainWindow.webContents.openDevTools(); // TODO comment en prod
+    mainWindow.webContents.openDevTools(); // TODO comment en prod
 };
 
 // This method will be called when Electron has finished

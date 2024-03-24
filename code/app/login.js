@@ -633,7 +633,31 @@
             }
          */
         // HACK punto gatillo: recupera el keycloak asociado a la url location.hostname
-        let keycloak_config_file = sprintf("/static/app/conf/%s.keycloak.json", window.location.hostname);
+        let hostname = window.location.hostname;
+        /*
+         *  window.location.pathname
+         *  en browser  = "/"
+         *  en electron = "/yuneta/development/.../gui_yunetas.js/tags/0.00.aa/index.html"
+         *  en android  = "/index.html"
+         */
+        let pathname = window.location.pathname;
+
+        // Get the base name ('file.txt')
+        // Split the path by '/' and get the last component
+        const segments = pathname.split('/');
+        const baseName = segments.pop(); // or segments[segments.length - 1] if you don't want to modify the original array
+
+        // Get the directory path ('/home/user/dir')
+        // Join the remaining segments back into a string
+        const dirName = segments.join('/');
+
+        if(empty_string(hostname)) {
+            hostname = "localhost";
+        }
+        let keycloak_config_file = sprintf("%s/static/app/conf/%s.keycloak.json",
+            dirName,
+            hostname
+        );
         load_json_file(
             keycloak_config_file,
             function(json_content) {
