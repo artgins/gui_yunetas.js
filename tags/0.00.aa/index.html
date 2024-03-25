@@ -20,8 +20,13 @@
         <link rel="stylesheet" href="static/jsoneditor/themes/defaults.scss.css?4fb46902">
         <link rel="stylesheet" href="static/app/yuneta_gui.scss.css?92de1fd8">
 
-        <script type="module" src="static/yuneta/widgets2/modules/jsoneditor.js"></script>
-        <script type="module" src="static/jsoneditor/standalone.js"></script>
+
+        <script type="module">
+            import { JSONEditor} from "./static/jsoneditor/standalone.js";
+            if(JSONEditor) {
+                window.JSONEditor = JSONEditor;
+            }
+        </script>
 
         <script src="static/h5bp/js/modernizr.js"></script>
         <script src="static/h5bp/js/plugins.js"></script>

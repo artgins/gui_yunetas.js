@@ -27,6 +27,13 @@
             % endfor
         % endif
 
+        <script type="module">
+            import { JSONEditor} from "./static/jsoneditor/standalone.js";
+            if(JSONEditor) {
+                window.JSONEditor = JSONEditor;
+            }
+        </script>
+
         % if 'top_js' in assets_env:
             % for url in assets_env['top_js']:
         <script src="${url}"></script>

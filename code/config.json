@@ -14,8 +14,6 @@
         "app/yuneta_gui.scss"
     ],
     "module_js": [
-        "yuneta/widgets2/modules/jsoneditor.js",
-        "jsoneditor/standalone.js"
     ],
     "top_js": [
         "h5bp/js/modernizr.js",
