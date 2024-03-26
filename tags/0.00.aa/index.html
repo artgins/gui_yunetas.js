@@ -1,80 +1,170 @@
-<!doctype html>
-<html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <title>Yuneta GUI</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Layout with Semi-Transparent Modal Overlay</title>
+    <style>
+        :root {
+            --layer-size: 40px;
+        }
 
-        <link rel="manifest" href="site.webmanifest">
-        <link rel="apple-touch-icon" href="icon.png">
-        <!-- Place favicon.ico in the root directory -->
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
 
-        <meta name="application-name" content="Yuneta GUI">
-        <meta name="description" content="Yuneta GUI">
-        <meta name="keywords" content="yuneta gui">
+        .fixed-layer {
+            position: fixed;
+            z-index: 10;
+        }
 
-        <link rel="stylesheet" href="static/h5bp/css/normalize.css">
-        <link rel="stylesheet" href="static/jsoneditor/themes/jse-theme-dark.css">
-        <link rel="stylesheet" href="static/w2ui/w2ui.css">
-        <link rel="stylesheet" href="static/yuneta-icon-font/yuneta-icon-font.css">
-        <link rel="stylesheet" href="static/jsoneditor/themes/defaults.scss.css?4fb46902">
-        <link rel="stylesheet" href="static/app/yuneta_gui.scss.css?92de1fd8">
+        .top-layer, .bottom-layer {
+            width: 100%;
+            height: var(--layer-size);
+            background-color: lightblue;
+        }
 
+        .top-layer {
+            top: 0;
+        }
+        .bottom-layer {
+            bottom: 0;
+        }
 
-        <script type="module">
-            import { JSONEditor} from "./static/jsoneditor/standalone.js";
-            if(JSONEditor) {
-                window.JSONEditor = JSONEditor;
-            }
-        </script>
+        .left-layer, .right-layer {
+            position: fixed;
+            top: var(--layer-size);
+            width: var(--layer-size);
+            bottom: var(--layer-size);
+            background-color: lightcoral;
+        }
 
-        <script src="static/h5bp/js/modernizr.js"></script>
-        <script src="static/h5bp/js/plugins.js"></script>
-        <script src="static/i18next/i18next.js"></script>
-        <script src="static/luxon/luxon.js"></script>
-        <script src="static/canvas/konva/konva.js"></script>
-        <script src="static/w2ui/w2ui.js"></script>
-        <script src="static/yuneta-icon-font/yuneta-icon-font.js"></script>
-        <script src="static/yuneta/sprintf.js"></script>
-        <script src="static/yuneta/utils.js"></script>
-        <script src="static/yuneta/gobj.js"></script>
-        <script src="static/yuneta/yuno.js"></script>
-        <script src="static/yuneta/ievent.js"></script>
-        <script src="static/yuneta/dbsimple.js"></script>
-        <script src="static/yuneta/widgets2/konva/ka_main.js"></script>
-        <script src="static/yuneta/widgets2/konva/ka_utils.js"></script>
-        <script src="static/yuneta/widgets2/konva/ka_scrollview.js"></script>
-        <script src="static/yuneta/widgets2/konva/ka_link.js"></script>
-        <script src="static/yuneta/widgets2/konva/ka_button.js"></script>
-        <script src="static/yuneta/widgets2/konva/ka_port.js"></script>
-        <script src="static/yuneta/widgets2/konva/ka_photon.js"></script>
-        <script src="static/yuneta/widgets2/konva/sw_display_message.js"></script>
-        <script src="static/yuneta/widgets2/konva/sw_menu.js"></script>
-        <script src="static/yuneta/widgets2/konva/sw_toolbar.js"></script>
-        <script src="static/yuneta/widgets2/konva/sw_multiview.js"></script>
-        <script src="static/yuneta/widgets2/konva/sw_graph.js"></script>
-        <script src="static/yuneta/widgets2/konva/ne_base.js"></script>
-        <script src="static/yuneta/widgets2/konva/shape_label_with_icon.js"></script>
-        <script src="static/yuneta/widgets2/w2/w2_jsoneditor.js"></script>
-    </head>
-    <body>
-        <div id="loading-message"
-            style="border: 1px solid blue; margin: 1em; padding: 2em; background-color: #f8f1fd;">
-            <strong>Loading application. Wait please...</strong>
+        .left-layer {
+            left: 0;
+        }
+        .right-layer {
+            right: 0;
+        }
+
+        .main-content {
+            position: absolute;
+            top: var(--layer-size);
+            bottom: var(--layer-size);
+            left: var(--layer-size);
+            right: var(--layer-size);
+            overflow: auto;
+            background-color: lightgreen;
+            margin: 10px;
+            padding: 10px;
+            white-space: nowrap;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.3);
+            z-index: 99;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+<!--        <div class="fixed-layer top-layer">Top
+            <button onclick="showModal()">Open Modal</button>
+            <button onclick="showMenu()" style="position: relative; z-index: 20;">Show Menu</button>
+            <button onclick="hideMenu()" style="position: relative; z-index: 20;">Hide Menu</button>
+        </div>-->
+
+<!--        <div class="top-layer" style="display: flex; align-items: center;">
+            <button onclick="showModal()" style="margin-left: 10px;">Open modal</button>
+            <button onclick="showMenu()" style="margin-left: 10px;">Show menu</button>
+            <button onclick="hideMenu()" style="margin-left: 10px;">Hide menu</button>
+        </div>-->
+
+<!--        <div class="top-layer" style="display: flex; align-items: center;">
+            <button onclick="showModal()" style="margin-left: 10px;">Open modal</button>
+            <button onclick="showMenu()" style="margin-left: 10px;">Show menu</button>
+            <button onclick="hideMenu()" style="margin-left: 10px;">Hide menu</button>
+
+            <div style="display: flex;">
+                <button style="margin-right: 10px;">Right Button 1</button>
+                <button>Right Button 2</button>
+            </div>
+        </div>-->
+
+        <div class="top-layer" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <div style="display: flex;">
+                <button onclick="showModal()" style="margin-left: 10px;">Open modal</button>
+                <button onclick="showMenu()" style="margin-left: 10px;">Show menu</button>
+                <button onclick="hideMenu()" style="margin-left: 10px;">Hide menu</button>
+            </div>
+            <div style="display: flex;">
+                <button style="margin-left: 10px;">Cebter 1</button>
+                <button style="margin-left: 10px; margin-right: 10px;">Center 2</button>
+                <button style="margin-right: 10px;">Center 2</button>
+            </div>
+            <div style="display: flex;">
+                <button style="margin-right: 10px;">Right Button 1</button>
+                <button style="margin-right: 10px;">Right Button 2</button>
+            </div>
         </div>
 
-        <!--  z-index 2 and 3 busy by login form -->
-        <div style="z-index:1;" id="gui_canvas"></div>
+        <div id="left-layer" class="fixed-layer left-layer">Left</div>
+        <div class="fixed-layer right-layer">Right</div>
+        <div class="fixed-layer bottom-layer">Bottom</div>
+        <div class="main-content">
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+            Main (scrollable, no wrapping) Main (scrollable, no wrapping) Main (scrollable, no wrapping) <br>
+        </div>
+    </div>
+    <div id="modalOverlay" class="modal-overlay" onclick="hideModal()">
+        <button style="left:100px; top:100px" onclick="hideModal()">Close Fullscreen Modal</button>
+<!--        <button onclick="showModal()" style="position: absolute; top: 100px; left: 100px; z-index: 20;">Open Modal</button>-->
+    </div>
+    <script>
+        function showMenu() {
+            document.querySelector('.left-layer').style.width = '100px';
+            // document.querySelector('.bottom-layer').style.left = '100px'; // Adjust the bottom layer accordingly
+            document.querySelector('.main-content').style.left = '100px'; // Adjust the main content accordingly
+        }
+        function hideMenu() {
+            document.querySelector('.left-layer').style.width = '40px';
+            // document.querySelector('.bottom-layer').style.left = '100px'; // Adjust the bottom layer accordingly
+            document.querySelector('.main-content').style.left = '40px'; // Adjust the main content accordingly
+        }
 
-        <script src="static/app/locales/en.js"></script>
-        <script src="static/app/locales/es.js"></script>
-        <script src="static/app/conf/urls.js"></script>
-        <script src="static/app/yuneta_gui.js"></script>
-        <script src="static/app/login.js"></script>
-        <script src="static/app/ui/ui_layer.js"></script>
-        <script src="static/app/ui/ui_header.js"></script>
-        <script src="static/app/gf/gf_agents.js"></script>
-        <script src="static/app/__yuno__.js"></script>
+        function showModal() {
+            document.getElementById('modalOverlay').style.display = 'block';
+        }
 
-    </body>
+        function hideModal() {
+            document.getElementById('modalOverlay').style.display = 'none';
+        }
+    </script>
+</body>
 </html>
