@@ -193,38 +193,38 @@
             self
         );
 
-        self.config.gobj_layer = self.yuno.gobj_create_service(
-            "__layer__",
-            Layer,
+        self.config.gobj_ui_main = self.yuno.gobj_create_service(
+            "__ui_main__",
+            Ui_main,
             {
                 layers: layers
             },
             self
         );
 
-        let gobj_ka_main = self.config.gobj_ka_main = self.yuno.gobj_create_service(
-            "__ka_main__",
-            Ka_main,
-            {
-            },
-            self
-        );
+        // let gobj_ka_main = self.config.gobj_ka_main = self.yuno.gobj_create_service(
+        //     "__ka_main__",
+        //     Ka_main,
+        //     {
+        //     },
+        //     self
+        // );
 
-        self.config.gobj_ui_header = self.yuno.gobj_create(
-            "ui_header",
-            Ui_header,
-            {
-                layer: gobj_ka_main.get_static_layer(),
-                x: 0,
-                y: 0,
-                width: gobj_ka_main.config.width,
-                height: self.config.header_size,
-                icon_size: 30,
-                text_size: 20
-            },
-            self
-        );
-        gobj_ka_main.get_static_layer().draw();
+        // self.config.gobj_ui_header = self.yuno.gobj_create(
+        //     "ui_header",
+        //     Ui_header,
+        //     {
+        //         layer: gobj_ka_main.get_static_layer(),
+        //         x: 0,
+        //         y: 0,
+        //         width: gobj_ka_main.config.width,
+        //         height: self.config.header_size,
+        //         icon_size: 30,
+        //         text_size: 20
+        //     },
+        //     self
+        // );
+        // gobj_ka_main.get_static_layer().draw();
 
         // self.config.gobj_mw_work_area = self.yuno.gobj_create(
         //     "mw_work_area",

@@ -1,13 +1,13 @@
 /***********************************************************************
- *          Ui_layer.js
+ *          ui_main.js
  *
- *          Service of layers
+ *          UI Main
  *
  *          Copyright (c) 2024, ArtGins.
  *          All Rights Reserved.
  ***********************************************************************/
 (function (exports) {
-    'use strict';
+    "use strict";
 
     /********************************************
      *  Configuration (C attributes)
@@ -19,13 +19,6 @@
     let CONFIG = {
         //////////////// Public Attributes //////////////////
         subscriber: null,       // subscriber of publishing messages
-
-        layers: [],             // layers
-            // layer: {
-            //     id: "",
-            //     description: "",
-            //     style: ""
-            // }
 
         timeout_retry: 5,       // timeout retry, in seconds
         timeout_idle: 5         // idle timeout, in seconds
@@ -89,6 +82,8 @@
      ********************************************/
     function ac_timeout(self, event, kw, src)
     {
+        trace_msg("ac_timeout");
+        //self.set_timeout(1*1000);
         return 0;
     }
 
@@ -117,21 +112,21 @@
         }
     };
 
-    let Layer = GObj.__makeSubclass__();
-    let proto = Layer.prototype; // Easy access to the prototype
+    let Ui_main = GObj.__makeSubclass__();
+    let proto = Ui_main.prototype; // Easy access to the prototype
     proto.__init__= function(name, kw) {
         GObj.prototype.__init__.call(
             this,
             FSM,
             CONFIG,
             name,
-            "Layer",
+            "Ui_main",
             kw,
             0
         );
         return this;
     };
-    gobj_register_gclass(Layer, "Layer");
+    gobj_register_gclass(Ui_main, "Ui_main");
 
 
 
@@ -153,15 +148,11 @@
         /*
          *  Child model? subscriber is the parent
          */
+        if(!self.config.subscriber) {
+            self.config.subscriber = self.gobj_parent();  // Remove if not child model
+        }
         if(self.config.subscriber) {
             self.gobj_subscribe_event(null, {}, self.config.subscriber);
-        }
-
-        for(let i=0; i<self.config.layers; i++) {
-            let layer = self.config.layers[i];
-            $("body").add(
-                sprintf("<div id='%s' style='%s'></div>", layer.id, layer.style)
-            );
         }
     };
 
@@ -180,6 +171,7 @@
     proto.mt_start = function(kw)
     {
         let self = this;
+        self.set_timeout(1*1000);
     };
 
     /************************************************
@@ -188,6 +180,7 @@
     proto.mt_stop = function(kw)
     {
         let self = this;
+        self.clear_timeout();
     };
 
     /************************************************
@@ -210,7 +203,7 @@
             case "help":
                 return cmd_help(self, command, kw, src);
             default:
-                log_error(sprintf("Command not found: %s", command));
+                log_error("Command not found: %s", command);
                 let webix = {
                     "result": -1,
                     "comment": sprintf("Command not found: %s", command),
@@ -225,6 +218,6 @@
     //=======================================================================
     //      Expose the class via the global object
     //=======================================================================
-    exports.Layer = Layer;
+    exports.Ui_main = Ui_main;
 
 })(this);

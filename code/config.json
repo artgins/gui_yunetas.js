@@ -51,7 +51,7 @@
         "app/conf/urls.js",
         "app/yuneta_gui.js",
         "app/login.js",
-        "app/ui/ui_layer.js",
+        "app/ui/ui_main.js",
         "app/ui/ui_header.js",
         "app/gf/gf_agents.js",
         "app/__yuno__.js"
