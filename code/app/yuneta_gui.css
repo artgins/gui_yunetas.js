@@ -9,7 +9,6 @@
     --right-layer-size: 40px;
     --main-content-margin-size: 5px;
     --main-content-padding-size: 5px;
-
 }
 
 body, html {
@@ -28,6 +27,10 @@ body, html {
     top: 0;
     width: 100%;
     height: var(--top-layer-size);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     background-color: lightblue;
 }
 
@@ -35,6 +38,10 @@ body, html {
     bottom: 0;
     width: 100%;
     height: var(--bottom-layer-size);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     background-color: lightblue;
 }
 
