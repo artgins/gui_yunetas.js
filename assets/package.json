@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bulma": "^1.0.0",
     "cytoscape": "^3.28.1",
     "echarts": "^5.5.0",
     "force-graph": "^1.43.5",
@@ -7,7 +8,12 @@
     "i18next": "^23.10.1",
     "konva": "^9.3.6",
     "luxon": "^3.4.4",
+    "sass": "^1.72.0",
     "uplot": "^1.6.30",
     "vanilla-jsoneditor": "^0.23.0"
+  },
+  "scripts": {
+    "build-bulma": "sass --load-path=node_modules yuneta_gui_bulma.scss yuneta_gui_bulma.css;",
+    "start": "npm run build-bulma -- --watch"
   }
 }

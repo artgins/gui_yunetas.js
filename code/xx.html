@@ -1,0 +1,41 @@
+        <div class="container">
+            <div class="top-layer">
+                <div id="top-left-layer" style="display: flex;"></div>
+                <div id="top-center-layer" style="display: flex;"></div>
+                <div id="top-right-layer" style="display: flex;"></div>
+            </div>
+
+            <div id="bottom-layer" class="fixed-layer bottom-layer">
+                <div id="bottom-left-layer" style="display: flex;"></div>
+                <div id="bottom-center-layer" style="display: flex;"></div>
+                <div id="bottom-right-layer" style="display: flex;"></div>
+            </div>
+
+            <div id="left-layer" class="fixed-layer left-layer">
+            </div>
+            <div id="right-layer" class="fixed-layer right-layer">
+            </div>
+            <div id="main-content" class="main-content">
+            </div>
+        </div>
+        <div id="modalOverlay" class="modal-overlay" onclick="hideModal()">
+        </div>
+
+        <script>
+            function showMenu() {
+                document.querySelector('.left-layer').style.width = '100px';
+                document.querySelector('.main-content').style.left = '100px';
+            }
+            function hideMenu() {
+                document.querySelector('.left-layer').style.width = '40px';
+                document.querySelector('.main-content').style.left = '40px';
+            }
+
+            function showModal() {
+                document.getElementById('modalOverlay').style.display = 'block';
+            }
+
+            function hideModal() {
+                document.getElementById('modalOverlay').style.display = 'none';
+            }
+        </script>

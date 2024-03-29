@@ -9,19 +9,16 @@
 (function (exports) {
     "use strict";
 
-    /********************************************
+    /************************************************************
      *  Configuration (C attributes)
      *  Attributes without underscore prefix
      *      will be set in self.config
      *  Attributes with underscore ("_") prefix:
      *      will be set in self.private
-     ********************************************/
+     ************************************************************/
     let CONFIG = {
         //////////////// Public Attributes //////////////////
         subscriber: null,       // subscriber of publishing messages
-
-        timeout_retry: 5,       // timeout retry, in seconds
-        timeout_idle: 5         // idle timeout, in seconds
 
         //////////////// Private Attributes /////////////////
     };
@@ -36,9 +33,9 @@
 
 
 
-    /********************************************
+    /************************************************************
      *
-     ********************************************/
+     ************************************************************/
     function cmd_help(self, cmd, kw, src)
     {
         let webix = {
@@ -59,10 +56,91 @@
 
 
 
+    /************************************************************
+     *   Build UI
+     ************************************************************/
+    function build_ui(self)
+    {
+        /*---------------------------------------*
+         *      Main layout
+         *---------------------------------------*/
+        let pstyle = 'border: 1px solid #efefef; padding: 5px';
+        let layout = new w2layout({
+            box: '#layout',
+            name: 'layout',
+            panels: [
+                { type: 'top', size: 45, resizable: true, style: pstyle, html: 'top' },
+                { type: 'left', size: 45, resizable: true, style: pstyle, html: 'left' },
+                // { type: 'main', style: 'background-color: white;', overflow: 'hidden' },
 
-    /********************************************
+
+                { type: 'main', style: pstyle, html: 'content',
+                    toolbar: {
+                        items: [
+                            { type: 'check', id: 'item1', text: 'Check', img: 'icon-page', checked: true },
+                            { type: 'break', id: 'break0' },
+                            { type: 'menu', id: 'item2', text: 'Drop Down', img: 'icon-folder',
+                                items: [
+                                    { text: 'Item 1', icon: 'icon-page' },
+                                    { text: 'Item 2', icon: 'icon-page' },
+                                    { text: 'Item 3', value: 'Item Three', icon: 'icon-page' }
+                                ]
+                            },
+                            { type: 'break', id: 'break1' },
+                            { type: 'radio', id: 'item3', group: '1', text: 'Radio 1', img: 'icon-page', tooltip: 'Hint for item 3', checked: true },
+                            { type: 'radio', id: 'item4', group: '1', text: 'Radio 2', img: 'icon-page', tooltip: 'Hint for item 4' },
+                            { type: 'spacer' },
+                            { type: 'button', id: 'item5', text: 'Item 5', icon: 'w2ui-icon-check', tooltip: 'Hint for item 5' }
+                        ],
+                        onClick(event) {
+                            this.owner.html('main', `EVENT: ${event.type}<br>TARGET: ${event.target}`)
+                        }
+                    }
+                },
+
+
+                { type: 'preview', size: '50%', resizable: true, hidden: true, style: pstyle, html: 'preview' },
+                { type: 'right', size: 45, resizable: true, style: pstyle, html: 'right' },
+                { type: 'bottom', size: 45, resizable: true, hidden: false, style: pstyle, html: 'bottom' }
+
+            ]
+        });
+
+        // $("mybutton").addClass("button";
+
+        /*---------------------------------------*
+         *      Ventana user info
+         *---------------------------------------*/
+
+        /*---------------------------------------*
+         *      Top toolbar
+         *---------------------------------------*/
+
+        /*---------------------------------------*
+         *      Top toolbar
+         *      Menu "app" and "account"
+         *---------------------------------------*/
+
+        /*---------------------------------------*
+         *      Menu "account" (user)
+         *---------------------------------------*/
+
+        /*---------------------------------------*
+         *      Bottom toolbar
+         *---------------------------------------*/
+
+        /*---------------------------------------*
+         *      Work area
+         *---------------------------------------*/
+
+        /*---------------------------------------*
+         *      Set initial state
+         *---------------------------------------*/
+    }
+
+    /************************************************************
      *
-     ********************************************/
+     ************************************************************/
     function sample_local(self)
     {
     }
@@ -77,12 +155,12 @@
 
 
 
-    /********************************************
+    /************************************************************
      *
-     ********************************************/
+     ************************************************************/
     function ac_timeout(self, event, kw, src)
     {
-        trace_msg("ac_timeout");
+        // trace_msg("ac_timeout");
         //self.set_timeout(1*1000);
         return 0;
     }
@@ -138,54 +216,49 @@
 
 
 
-    /************************************************
+    /************************************************************
      *      Framework Method create
-     ************************************************/
+     ************************************************************/
     proto.mt_create = function(kw)
     {
         let self = this;
 
-        /*
-         *  Child model? subscriber is the parent
-         */
-        if(!self.config.subscriber) {
-            self.config.subscriber = self.gobj_parent();  // Remove if not child model
-        }
+        build_ui(self);
+
         if(self.config.subscriber) {
             self.gobj_subscribe_event(null, {}, self.config.subscriber);
         }
     };
 
-    /************************************************
+    /************************************************************
      *      Framework Method destroy
      *      In this point, all childs
      *      and subscriptions are already deleted.
-     ************************************************/
+     ************************************************************/
     proto.mt_destroy = function()
     {
     };
 
-    /************************************************
+    /************************************************************
      *      Framework Method start
-     ************************************************/
+     ************************************************************/
     proto.mt_start = function(kw)
     {
         let self = this;
-        self.set_timeout(1*1000);
     };
 
-    /************************************************
+    /************************************************************
      *      Framework Method stop
-     ************************************************/
+     ************************************************************/
     proto.mt_stop = function(kw)
     {
         let self = this;
         self.clear_timeout();
     };
 
-    /************************************************
+    /************************************************************
      *      Framework Method stats
-     ************************************************/
+     ************************************************************/
     proto.mt_stats = function(stats, kw, src)
     {
         let self = this;
@@ -193,9 +266,9 @@
         return {};
     };
 
-    /************************************************
+    /************************************************************
      *      Framework Method command
-     ************************************************/
+     ************************************************************/
     proto.mt_command = function(command, kw, src)
     {
         let self = this;

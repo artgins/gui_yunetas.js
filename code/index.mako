@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html>
     <head>
         <meta charset="utf-8">
         <title>${title}</title>
@@ -8,6 +8,8 @@
         <link rel="manifest" href="site.webmanifest">
         <link rel="apple-touch-icon" href="icon.png">
         <!-- Place favicon.ico in the root directory -->
+
+        <meta name="color-scheme" content="light" />
 
         % for key, value in metadata.items():
             % if value:
@@ -46,11 +48,7 @@
             <strong>Loading application. Wait please...</strong>
         </div>
 
-        <!--  z-index 2 and 3 busy by login form -->
-        <div style="z-index:1;" id="gui_canvas"></div>
-
-
-        <div class="container">
+        <div class="root">
             <div class="top-layer">
                 <div id="top-left-layer" style="display: flex;"></div>
                 <div id="top-center-layer" style="display: flex;"></div>
@@ -70,33 +68,14 @@
             <div id="main-content" class="main-content">
             </div>
         </div>
-        <div id="modalOverlay" class="modal-overlay" onclick="hideModal()">
+        <div id="modalOverlay" class="modal-overlay"">
         </div>
 
-        <script>
-            function showMenu() {
-                document.querySelector('.left-layer').style.width = '100px';
-                document.querySelector('.main-content').style.left = '100px';
-            }
-            function hideMenu() {
-                document.querySelector('.left-layer').style.width = '40px';
-                document.querySelector('.main-content').style.left = '40px';
-            }
-
-            function showModal() {
-                document.getElementById('modalOverlay').style.display = 'block';
-            }
-
-            function hideModal() {
-                document.getElementById('modalOverlay').style.display = 'none';
-            }
-        </script>
-
-    % if 'bottom_js' in assets_env:
-        % for url in assets_env['bottom_js']:
-        <script src="${url}"></script>
-        % endfor
-    % endif
+        % if 'bottom_js' in assets_env:
+            % for url in assets_env['bottom_js']:
+            <script src="${url}"></script>
+            % endfor
+        % endif
 
     </body>
 </html>

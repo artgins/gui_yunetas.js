@@ -7,7 +7,9 @@ release/
 debug/
 .idea/
 .webassets-cache/
+.sass-cache/
 .cache/
 node_modules/
 out/
 platforms/
+package-lock.json
