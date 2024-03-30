@@ -17,10 +17,10 @@
 
         <link rel="stylesheet" href="static/h5bp/css/normalize.css">
         <link rel="stylesheet" href="static/jsoneditor/themes/jse-theme-dark.css">
-        <link rel="stylesheet" href="static/bulma/css/bulma.css">
         <link rel="stylesheet" href="static/w2ui/w2ui.css">
         <link rel="stylesheet" href="static/yuneta-icon-font/yuneta-icon-font.css">
         <link rel="stylesheet" href="static/app/yuneta_gui.css">
+        <link rel="stylesheet" href="static/bulma/css/bulma.css">
         <link rel="stylesheet" href="static/jsoneditor/themes/defaults.scss.css?4fb46902">
 
 
@@ -99,5 +99,28 @@
             <script src="static/app/gf/gf_agents.js"></script>
             <script src="static/app/__yuno__.js"></script>
 
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeSelector = document.getElementById('theme-selector');
+
+        const applyTheme = (theme) => {
+          document.documentElement.setAttribute("data-theme", theme);
+        };
+
+        // Listen for changes on the theme selector
+        if(themeSelector) {
+            themeSelector.addEventListener('change', (e) => {
+              const selectedTheme = e.target.value;
+              localStorage.setItem('theme', selectedTheme); // Save theme preference
+              applyTheme(selectedTheme);
+            });
+        }
+
+        // Initialize theme on load
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        applyTheme(savedTheme);
+    });
+
+    </script>
     </body>
 </html>

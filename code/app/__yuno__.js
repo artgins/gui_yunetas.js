@@ -76,7 +76,7 @@
         kw
     );
 
-    window.onload = function() {
+    window.addEventListener('load', function() {
         /*
          *  Delete message waiting
          */
@@ -98,12 +98,12 @@
         );
         trace_msg("CREATED __default_service__");
         __yuno__.__default_service__.gobj_start();
-    };
+    });
 
-    window.onbeforeunload = function() {
+    window.addEventListener('beforeunload', function() {
         let r =__yuno__.gobj_read_attr("changesLost");
         return r?r:null;
-    };
+    });
 
     /************************************************
      *          Expose to the global object
