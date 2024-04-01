@@ -64,15 +64,15 @@
         /*---------------------------------------*
          *      Main layout
          *---------------------------------------*/
-        let pstyle = 'border: 1px solid #efefef; padding: 5px'
+        let pstyle = 'border: 1px solid #efefef; padding: 2px';
         let layout = new w2layout({
-            box: '#layout',
-            name: 'layout',
+            box: '#root',
+            name: 'main',
             panels: [
-                { type: 'top', size: 50, resizable: true, style: pstyle, html: 'top' },
-                { type: 'left', size: 200, resizable: true, style: pstyle, html: 'left' },
+                { type: 'top', size: 40, resizable: false, style: pstyle, html: 'top' },
+                { type: 'left', size: 200, resizable: false, style: pstyle, html: 'left' },
                 { type: 'main', style: pstyle, html: 'main' },
-                { type: 'bottom', size: 50, resizable: true, style: pstyle, html: 'bottom' }
+                { type: 'bottom', size: 40, resizable: false, style: pstyle, html: 'bottom' }
             ]
         });
 

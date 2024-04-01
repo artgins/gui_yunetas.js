@@ -9,7 +9,9 @@
     --main-content-margin-size: 5px;
     --main-content-padding-size: 5px;
     --border-primary: #cdcdcd;
-    /*background-color: #EEEEEE;*/
+    --font-size: 16px;
+    /*--font-size: 1em;*/
+    background-color: #EEEEEE;
 }
 
 .fixed-layer {
@@ -117,15 +119,22 @@
 /*********************************************************
  *      w2ui overwrite
  *********************************************************/
-.w2ui-toolbar .w2ui-scroll-wrapper .w2ui-tb-button .w2ui-tb-icon {
-    height: calc(var(--top-layer-size) - 10px) !important;
-    width: calc(var(--top-layer-size) - 10px) !important;
-    margin: 0 !important;
+/*.w2ui-toolbar .w2ui-scroll-wrapper .w2ui-tb-button .w2ui-tb-icon {*/
+/*    height: calc(var(--top-layer-size) - 10px) !important;*/
+/*    width: calc(var(--top-layer-size) - 10px) !important;*/
+/*    margin: 0 !important;*/
+/*}*/
+
+
+.w2ui-reset {
+    /*font-size: 1em !important;*/
+    font-size: var(--font-size) !important;
 }
 
-.w2ui-toolbar .w2ui-scroll-wrapper .w2ui-tb-button .w2ui-tb-icon > span {
-  font-size: 22px;
-  color: #8D99A7;
+.w2ui-tb-icon > span {
+    /*font-size: 1em !important;*/
+    font-size: var(--font-size) !important;
+    color: black !important;
 }
 
 /*********************************************************

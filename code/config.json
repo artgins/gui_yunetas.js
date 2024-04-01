@@ -7,7 +7,6 @@
     },
     "css_or_scss": [
         "h5bp/css/normalize.css",
-        "bulma/css/bulma.css",
         "fontawesome/css/all.css",
         "jsoneditor/themes/defaults.scss",
         "jsoneditor/themes/jse-theme-dark.css",

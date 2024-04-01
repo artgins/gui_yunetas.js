@@ -48,7 +48,7 @@
             <strong>Loading application. Wait please...</strong>
         </div>
 
-        <div id="layout">
+        <div id="root">
         </div>
 
         % if 'bottom_js' in assets_env:
