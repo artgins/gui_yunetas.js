@@ -30,22 +30,7 @@
         "yuneta/gobj.js",
         "yuneta/yuno.js",
         "yuneta/ievent.js",
-        "yuneta/dbsimple.js",
-        "yuneta/widgets2/konva/ka_main.js",
-        "yuneta/widgets2/konva/ka_utils.js",
-        "yuneta/widgets2/konva/ka_scrollview.js",
-        "yuneta/widgets2/konva/ka_link.js",
-        "yuneta/widgets2/konva/ka_button.js",
-        "yuneta/widgets2/konva/ka_port.js",
-        "yuneta/widgets2/konva/ka_photon.js",
-        "yuneta/widgets2/konva/sw_display_message.js",
-        "yuneta/widgets2/konva/sw_menu.js",
-        "yuneta/widgets2/konva/sw_toolbar.js",
-        "yuneta/widgets2/konva/sw_multiview.js",
-        "yuneta/widgets2/konva/sw_graph.js",
-        "yuneta/widgets2/konva/ne_base.js",
-        "yuneta/widgets2/konva/shape_label_with_icon.js",
-        "yuneta/widgets2/w2/w2_jsoneditor.js"
+        "yuneta/dbsimple.js"
     ],
     "bottom_js": [
         "app/locales/en.js",
