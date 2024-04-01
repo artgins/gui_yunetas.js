@@ -6,6 +6,7 @@
     "force-graph": "^1.43.5",
     "html5-boilerplate": "^9.0.0",
     "i18next": "^23.10.1",
+    "jquery": "^3.7.1",
     "konva": "^9.3.6",
     "luxon": "^3.4.4",
     "sass": "^1.72.0",

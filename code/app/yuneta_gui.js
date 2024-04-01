@@ -35,24 +35,6 @@
         gobj_gf_agents: null
     };
 
-    let layers = [
-        {
-            id: "main",
-            description: "Main layer, working layer",
-            style: ""
-        },
-        {
-            id: "static",
-            description: "Static layer, absolute position, above the main layer",
-            style: ""
-        },
-        {
-            id: "modal",
-            description: "Modal layer, when active all others are blocked",
-            style: ""
-        }
-    ];
-
     const colorModes = {
         light: "light",
         dark: "dark"
@@ -194,9 +176,13 @@
     // </div>
 
 
-    /***************************
-     *      Local Methods
-     ***************************/
+
+
+                    /***************************
+                     *      Local Methods
+                     ***************************/
+
+
 
 
     /********************************************
@@ -322,14 +308,13 @@
             self
         );
 
-        // self.config.gobj_ui_main = self.yuno.gobj_create_service(
-        //     "__ui_main__",
-        //     Ui_main,
-        //     {
-        //         layers: layers
-        //     },
-        //     self
-        // );
+        self.config.gobj_ui_main = self.yuno.gobj_create_service(
+            "__ui_main__",
+            Ui_main,
+            {
+            },
+            self
+        );
 
         // let gobj_ka_main = self.config.gobj_ka_main = self.yuno.gobj_create_service(
         //     "__ka_main__",

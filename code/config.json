@@ -7,12 +7,13 @@
     },
     "css_or_scss": [
         "h5bp/css/normalize.css",
+        "bulma/css/bulma.css",
+        "fontawesome/css/all.css",
         "jsoneditor/themes/defaults.scss",
         "jsoneditor/themes/jse-theme-dark.css",
         "w2ui/w2ui.css",
         "yuneta-icon-font/yuneta-icon-font.css",
-        "app/yuneta_gui.css",
-        "bulma/css/bulma.css"
+        "app/yuneta_gui.css"
     ],
     "module_js": [
     ],

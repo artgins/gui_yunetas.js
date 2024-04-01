@@ -48,27 +48,7 @@
             <strong>Loading application. Wait please...</strong>
         </div>
 
-        <div class="root">
-            <div class="top-layer">
-                <div id="top-left-layer" style="display: flex;"></div>
-                <div id="top-center-layer" style="display: flex;"></div>
-                <div id="top-right-layer" style="display: flex;"></div>
-            </div>
-
-            <div id="bottom-layer" class="fixed-layer bottom-layer">
-                <div id="bottom-left-layer" style="display: flex;"></div>
-                <div id="bottom-center-layer" style="display: flex;"></div>
-                <div id="bottom-right-layer" style="display: flex;"></div>
-            </div>
-
-            <div id="left-layer" class="fixed-layer left-layer">
-            </div>
-            <div id="right-layer" class="fixed-layer right-layer">
-            </div>
-            <div id="main-content" class="main-content">
-            </div>
-        </div>
-        <div id="modalOverlay" class="modal-overlay"">
+        <div id="layout">
         </div>
 
         % if 'bottom_js' in assets_env:

@@ -811,9 +811,12 @@
                 width: 400,
                 height: 350,
                 onResized(ev) {
-                    editor && editor.setSize && editor.setSize(
-                        ev.detail.body_rect.width, ev.detail.body_rect.height
-                    );
+                    if(editor && editor.setSize) {
+                        editor.setSize(
+                            ev.detail.body_rect.width,
+                            ev.detail.body_rect.height
+                        );
+                    }
                 },
                 onClose(ev) {
                     editor && editor.destroy && editor.destroy();

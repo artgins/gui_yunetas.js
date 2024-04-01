@@ -64,49 +64,45 @@
         /*---------------------------------------*
          *      Main layout
          *---------------------------------------*/
-        let pstyle = 'border: 1px solid #efefef; padding: 5px';
+        let pstyle = 'border: 1px solid #efefef; padding: 5px'
         let layout = new w2layout({
             box: '#layout',
             name: 'layout',
             panels: [
-                { type: 'top', size: 45, resizable: true, style: pstyle, html: 'top' },
-                { type: 'left', size: 45, resizable: true, style: pstyle, html: 'left' },
-                // { type: 'main', style: 'background-color: white;', overflow: 'hidden' },
-
-
-                { type: 'main', style: pstyle, html: 'content',
-                    toolbar: {
-                        items: [
-                            { type: 'check', id: 'item1', text: 'Check', img: 'icon-page', checked: true },
-                            { type: 'break', id: 'break0' },
-                            { type: 'menu', id: 'item2', text: 'Drop Down', img: 'icon-folder',
-                                items: [
-                                    { text: 'Item 1', icon: 'icon-page' },
-                                    { text: 'Item 2', icon: 'icon-page' },
-                                    { text: 'Item 3', value: 'Item Three', icon: 'icon-page' }
-                                ]
-                            },
-                            { type: 'break', id: 'break1' },
-                            { type: 'radio', id: 'item3', group: '1', text: 'Radio 1', img: 'icon-page', tooltip: 'Hint for item 3', checked: true },
-                            { type: 'radio', id: 'item4', group: '1', text: 'Radio 2', img: 'icon-page', tooltip: 'Hint for item 4' },
-                            { type: 'spacer' },
-                            { type: 'button', id: 'item5', text: 'Item 5', icon: 'w2ui-icon-check', tooltip: 'Hint for item 5' }
-                        ],
-                        onClick(event) {
-                            this.owner.html('main', `EVENT: ${event.type}<br>TARGET: ${event.target}`)
-                        }
-                    }
-                },
-
-
-                { type: 'preview', size: '50%', resizable: true, hidden: true, style: pstyle, html: 'preview' },
-                { type: 'right', size: 45, resizable: true, style: pstyle, html: 'right' },
-                { type: 'bottom', size: 45, resizable: true, hidden: false, style: pstyle, html: 'bottom' }
-
+                { type: 'top', size: 50, resizable: true, style: pstyle, html: 'top' },
+                { type: 'left', size: 200, resizable: true, style: pstyle, html: 'left' },
+                { type: 'main', style: pstyle, html: 'main' },
+                { type: 'bottom', size: 50, resizable: true, style: pstyle, html: 'bottom' }
             ]
         });
 
-        // $("mybutton").addClass("button";
+        // let x = new w2toolbar({
+        //     box: '#root',
+        //     name: 'toolbar',
+        //     items: [
+        //         {type: 'button', id: 'item1', icon: 'fa-solid fa-bars',
+        //             onClick(event) {
+        //                 console.log('111 -> Target: '+ event.target, event);
+        //             }
+        //         },
+        //         {type: 'html', id: 'item2',
+        //             html(item) {
+        //                 let html = '<button class="button" style="padding: 2px">HTML as string</button>';
+        //                 return html;
+        //             },
+        //             onClick(event) {
+        //                 console.log('111 -> BIEEEENNN Target: '+ event.target, event);
+        //             }
+        //         }
+        //
+        //     ],
+        //     onClick(event) {
+        //         console.log('222 -> Target: '+ event.target, event);
+        //     }
+        // });
+
+        // query("#tb_toolbar_item_item1 > .w2ui-tb-icon").addClass("button");
+        // query("#tb_toolbar_item_item1 span").css('color', 'red');
 
         /*---------------------------------------*
          *      Ventana user info
