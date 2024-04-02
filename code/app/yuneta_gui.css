@@ -9,9 +9,9 @@
     --main-content-margin-size: 5px;
     --main-content-padding-size: 5px;
     --border-primary: #cdcdcd;
+
     --font-size: 16px;
-    /*--font-size: 1em;*/
-    background-color: #EEEEEE;
+    --font-family: "sans-serif";
 }
 
 
@@ -61,11 +61,23 @@
 /*    font-size: var(--font-size) !important;*/
 /*}*/
 
-/*.w2ui-tb-icon > span {*/
-/*    !*font-size: 1em !important;*!*/
-/*    font-size: var(--font-size) !important;*/
-/*    color: black !important;*/
-/*}*/
+#layout_main_panel_top .w2ui-tb-icon > span {
+    color: black !important;
+    font-size: 24px !important;
+}
+
+#layout_main_panel_top .w2ui-toolbar .w2ui-scroll-wrapper .w2ui-tb-button {
+    height: 40px !important;
+}
+
+#layout_main_panel_top .w2ui-toolbar .w2ui-scroll-wrapper {
+    height: 40px !important;
+    padding: 0 !important;
+}
+
+#layout_main_panel_top .w2ui-toolbar {
+    overflow: hidden !important;
+}
 
 /*********************************************************
  *      Body

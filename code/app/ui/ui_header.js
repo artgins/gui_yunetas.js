@@ -62,9 +62,10 @@
 
 
 
-            /***************************
-             *      Local Methods
-             ***************************/
+                    /***************************
+                     *      Local Methods
+                     ***************************/
+
 
 
 
@@ -86,15 +87,6 @@
         self.config._wrapper_login_form.style.visibility = "hidden";
         self.config._login_form.style.visibility = "hidden";
         self.config.layer.getStage().getContainer().focus();
-    }
-
-    /************************************************
-     *
-     ************************************************/
-    function adjust_text_and_icon_size(self)
-    {
-        self.private._text_size = adjust_font_size(self.config.text_size, self.config.fontFamily);
-        self.private._icon_size = adjust_font_size(self.config.icon_size, self.config.fontFamily);
     }
 
     /********************************************
