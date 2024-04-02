@@ -44,16 +44,16 @@
     </head>
     <body>
         <div id="root">
-            <div class="top-layer">
-                <div id="top-left-layer"></div>
-                <div id="top-center-layer"></div>
-                <div id="top-right-layer"></div>
+            <div id="top-layer" class="top-layer">
+                <div id="top-left-layer" class="top-left-layer"></div>
+                <div id="top-center-layer" class="top-center-layer"></div>
+                <div id="top-right-layer" class="top-right-layer"></div>
             </div>
 
             <div id="bottom-layer" class="bottom-layer">
-                <div id="bottom-left-layer"></div>
-                <div id="bottom-center-layer"></div>
-                <div id="bottom-right-layer"></div>
+                <div id="bottom-left-layer" class="bottom-left-layer"></div>
+                <div id="bottom-center-layer" class="bottom-center-layer"></div>
+                <div id="bottom-right-layer" class="bottom-right-layer"></div>
             </div>
 
             <div id="left-layer" class="left-layer">

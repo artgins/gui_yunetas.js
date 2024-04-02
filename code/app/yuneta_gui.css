@@ -19,9 +19,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.top-left-layer {
+    display: flex;
+}
+
+.top-center-layer {
+    display: flex;
+}
+
+.top-right-layer {
+    display: flex;
 }
 
 .bottom-layer {
@@ -35,10 +47,23 @@
     align-items: center;
 }
 
+.bottom-left-layer {
+    display: flex;
+}
+
+.bottom-center-layer {
+    display: flex;
+}
+
+.bottom-right-layer {
+    display: flex;
+}
+
 .left-layer {
     position: fixed;
     z-index: 10;
     left: 0;
+    margin-left: 5px;
     top: var(--top-layer-size);
     width: var(--left-layer-size);
     bottom: var(--bottom-layer-size);
@@ -48,6 +73,7 @@
     position: fixed;
     z-index: 10;
     right: 0;
+    margin-right: 5px;
     top: var(--top-layer-size);
     width: var(--right-layer-size);
     bottom: var(--bottom-layer-size);
