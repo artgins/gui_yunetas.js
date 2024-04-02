@@ -21,13 +21,16 @@
         title: "",          // Text in center of top toolbar
         subscriber: null,   // subscriber of publishing messages
 
+        color_yuneta_connected: "#32CD32",      // LimeGreen
+        color_yuneta_disconnected: "#FF4500",   // OrangeRed
+        // color_user_logout: "#708090",        // SlateGray
+        // color_user_login: "#F58E25",         // Carrot Orange
+        color_user_login: "#32CD32",            // LimeGreen
+        color_user_logout: "#FF4500",           // OrangeRed
+
         $ui: null,      // w2ui object
-        icon_size: 30,  // Wanted size, but change by checking pixels in browser
-        text_size: 18,  // it's different in mobile with text size larger
 
         //////////////// Private Attributes /////////////////
-        _icon_size: 0,      // Calculated by checking browser
-        _text_size: 0,      // Calculated by checking browser
     };
 
     const colorModes = {
@@ -183,8 +186,7 @@
     /************************************************************
      *
      ************************************************************/
-    function cmd_help(self, cmd, kw, src)
-    {
+    function cmd_help(self, cmd, kw, src) {
         let webix = {
             "result": 0,
             "comment": "",
@@ -203,86 +205,27 @@
 
 
 
+
     /************************************************************
      *   Build UI
      ************************************************************/
     function build_ui(self)
     {
         /*---------------------------------------*
-         *      Fix sizes
-         *---------------------------------------*/
-        adjust_text_and_icon_size(self);
-
-        /*---------------------------------------*
-         *      Main layout
-         *---------------------------------------*/
-        let style_panels = 'border: 1px solid #efefef; padding: 2px';
-        let layout = self.config.$ui = new w2layout({
-            box: '#root',
-            name: 'main',
-            panels: [
-                { type: 'top', size: 45, resizable: false, style: style_panels},
-                { type: 'left', size: 200, minSize: 40, resizable: true, style: style_panels},
-                { type: 'main', style: style_panels},
-                { type: 'bottom', size: 40, resizable: false, style: style_panels}
-            ]
-        });
-
-        let html_home = `<span id="top_toolbar_home">${self.config.title}</span>`;
-        let top_toolbar = new w2toolbar({
-            name: 'toolbar',
-            items: [
-                { type: "button", id: "EV_APP_MENU", text: " ", icon: "fa fa-bars" },
-                { type: "spacer" },
-                { type: "html", id: "EV_HOME", html: html_home, style:"font-size:20px;padding-top:2px;"},
-                { type: "spacer" },
-                { type: "button", id: "EV_USER_MENU", text: " ", icon: "fa fa-user" }
-            ],
-            onClick(event) {
-                console.log('Target: '+ event.target, event);
-            }
-        });
-        layout.html('top', top_toolbar);
-
-
-        // let x = new w2toolbar({
-        //     box: '#root',
-        //     name: 'toolbar',
-        //     items: [
-        //         {type: 'button', id: 'item1', icon: 'fa-solid fa-bars',
-        //             onClick(event) {
-        //                 console.log('111 -> Target: '+ event.target, event);
-        //             }
-        //         },
-        //         {type: 'html', id: 'item2',
-        //             html(item) {
-        //                 let html = '<button class="button" style="padding: 2px">HTML as string</button>';
-        //                 return html;
-        //             },
-        //             onClick(event) {
-        //                 console.log('111 -> BIEEEENNN Target: '+ event.target, event);
-        //             }
-        //         }
-        //
-        //     ],
-        //     onClick(event) {
-        //         console.log('222 -> Target: '+ event.target, event);
-        //     }
-        // });
-
-        // query("#tb_toolbar_item_item1 > .w2ui-tb-icon").addClass("button");
-        // query("#tb_toolbar_item_item1 span").css('color', 'red');
-
-        /*---------------------------------------*
-         *      Top toolbar
-         *---------------------------------------*/
-
-        /*---------------------------------------*
          *      Top toolbar
          *      Menu "app" and "account"
          *---------------------------------------*/
+        let template = `
+            <button class="button">
+                <span class="icon is-medium is-responsive">
+<svg viewBox="0 0 448 512"><path fill="${self.config.color_yuneta_disconnected}" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
+                </span>
+            </button>
+        `;
+        jQuery("#top-left-layer").html(template);
 
         /*---------------------------------------*
+         *      Top toolbar
          *      Menu "account" (user)
          *---------------------------------------*/
 
@@ -299,20 +242,10 @@
          *---------------------------------------*/
     }
 
-    /************************************************
-     *
-     ************************************************/
-    function adjust_text_and_icon_size(self)
-    {
-        self.private._text_size = adjust_font_size(self.config.text_size, self.config.fontFamily);
-        self.private._icon_size = adjust_font_size(self.config.icon_size, self.config.fontFamily);
-    }
-
     /************************************************************
      *
      ************************************************************/
-    function sample_local(self)
-    {
+    function sample_local(self) {
     }
 
 
@@ -332,7 +265,7 @@
     {
         // trace_msg("ac_timeout");
         //self.set_timeout(1*1000);
-        return 0;
+            return 0;
     }
 
 

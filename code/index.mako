@@ -43,12 +43,25 @@
         % endif
     </head>
     <body>
-        <div id="loading-message"
-            style="border: 1px solid blue; margin: 1em; padding: 2em; background-color: #f8f1fd;">
-            <strong>Loading application. Wait please...</strong>
-        </div>
-
         <div id="root">
+            <div class="top-layer">
+                <div id="top-left-layer"></div>
+                <div id="top-center-layer"></div>
+                <div id="top-right-layer"></div>
+            </div>
+
+            <div id="bottom-layer" class="bottom-layer">
+                <div id="bottom-left-layer"></div>
+                <div id="bottom-center-layer"></div>
+                <div id="bottom-right-layer"></div>
+            </div>
+
+            <div id="left-layer" class="left-layer">
+            </div>
+            <div id="right-layer" class="right-layer">
+            </div>
+            <div id="main-content" class="main-content">
+            </div>
         </div>
 
         % if 'bottom_js' in assets_env:

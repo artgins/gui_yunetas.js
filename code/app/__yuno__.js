@@ -40,7 +40,7 @@
     /************************************************
      *          Startup code
      ************************************************/
-    if(!Modernizr.websockets) {
+    if (!('WebSocket' in window)) {
         alert("This app cannot run without websockets!");
         return;
     }
@@ -77,11 +77,6 @@
     );
 
     window.addEventListener('load', function() {
-        /*
-         *  Delete message waiting
-         */
-        document.getElementById("loading-message").remove();
-
         let kw_main = {
             locales: locales
         };

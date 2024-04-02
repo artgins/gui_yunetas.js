@@ -4,7 +4,6 @@
     "cytoscape": "^3.28.1",
     "echarts": "^5.5.0",
     "force-graph": "^1.43.5",
-    "html5-boilerplate": "^9.0.0",
     "i18next": "^23.10.1",
     "jquery": "^3.7.1",
     "konva": "^9.3.6",
