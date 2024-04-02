@@ -20,6 +20,7 @@
         //////////////// Public Attributes //////////////////
         subscriber: null,       // subscriber of publishing messages
 
+        $ui: null               // w2ui object
         //////////////// Private Attributes /////////////////
     };
 
@@ -65,14 +66,14 @@
          *      Main layout
          *---------------------------------------*/
         let pstyle = 'border: 1px solid #efefef; padding: 2px';
-        let layout = new w2layout({
+        self.config.$ui = new w2layout({
             box: '#root',
             name: 'main',
             panels: [
-                { type: 'top', size: 40, resizable: false, style: pstyle, html: 'top' },
-                { type: 'left', size: 200, resizable: false, style: pstyle, html: 'left' },
-                { type: 'main', style: pstyle, html: 'main' },
-                { type: 'bottom', size: 40, resizable: false, style: pstyle, html: 'bottom' }
+                { type: 'top', size: 40, resizable: false, style: pstyle},
+                { type: 'left', size: 200, resizable: true, style: pstyle},
+                { type: 'main', style: pstyle},
+                { type: 'bottom', size: 40, resizable: false, style: pstyle}
             ]
         });
 
@@ -103,10 +104,6 @@
 
         // query("#tb_toolbar_item_item1 > .w2ui-tb-icon").addClass("button");
         // query("#tb_toolbar_item_item1 span").css('color', 'red');
-
-        /*---------------------------------------*
-         *      Ventana user info
-         *---------------------------------------*/
 
         /*---------------------------------------*
          *      Top toolbar
