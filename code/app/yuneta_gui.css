@@ -103,7 +103,12 @@
 }
 
 .with-border {
-    border: 1px solid #efefef;
+    border: 1px solid #efefef !important;
+}
+
+.without-border {
+    border: none !important; /* Remove the border */
+    box-shadow: none !important; /* Optional: remove the box-shadow if present */
 }
 
 /*********************************************************
