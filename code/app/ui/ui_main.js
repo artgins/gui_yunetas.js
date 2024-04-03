@@ -211,6 +211,7 @@
      ************************************************************/
     function build_ui(self)
     {
+        return;
         /*---------------------------------------*
          *      Top toolbar elements
          *---------------------------------------*/
@@ -228,11 +229,26 @@
         `);
 
         /*
+         *  Center App Logo
+         */
+        let path_root = get_location_path_root(); // get dirName of window.location.pathname
+        let image_file = sprintf("%s/static/app/images/app-logo.png",
+            path_root
+        );
+        jQuery("#top-center-layer").html(`
+            <div class="buttons">
+                <figure class="image" style="width: 80px; height: 38px;">
+                    <img src="${image_file}" alt="App logo"/>
+                </figure>
+            </div>
+        `);
+
+        /*
          *  Menu "account"
          *  change theme, username, account menu
          */
         jQuery("#top-right-layer").html(`
-            <div class="is-responsive">
+            <div class="">
                 <button class="button without-border">
                     <span class="icon">
                         <i class="fas fa-lg fa-sun"></i>
@@ -248,21 +264,6 @@
         `);
 
         //themes();
-
-        /*
-         *  Center App Logo
-         */
-        let path_root = get_location_path_root(); // get dirName of window.location.pathname
-        let image_file = sprintf("%s/static/app/images/app-logo.png",
-            path_root
-        );
-        jQuery("#top-center-layer").html(`
-            <div class="buttons">
-                <figure class="image" style="width: 80px; height: 38px;">
-                    <img src="${image_file}" alt="App logo"/>
-                </figure>
-            </div>
-        `);
 
         /*---------------------------------------*
          *      Top toolbar

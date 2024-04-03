@@ -44,6 +44,86 @@
     </head>
     <body>
         <div id="root">
+
+<div class="toolbar">
+  <div class="toolbar-section left">
+    <!-- Place left items here -->
+    <span>Left Item 1</span>
+    <span>Left Item 2</span>
+  </div>
+  <div class="toolbar-section center">
+    <!-- Place center items here -->
+    <span>Center Item 1</span>
+    <span>Center Item 2</span>
+  </div>
+  <div class="toolbar-section right">
+    <!-- Place right items here -->
+    <span>Right Item 1</span>
+    <span>Right Item 2</span>
+  </div>
+</div>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulma Page Layout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+<body>
+
+<!-- Main Content -->
+<section class="section">
+  <div class="container">
+    <div class="columns">
+
+      <!-- Left Side Menu -->
+      <div class="column is-one-quarter">
+        <aside class="menu">
+          <p class="menu-label">General</p>
+          <ul class="menu-list">
+            <li><a>Dashboard</a></li>
+            <li><a>Customers</a></li>
+          </ul>
+          <p class="menu-label">Administration</p>
+          <ul class="menu-list">
+            <li><a>Team Settings</a></li>
+            <li>
+              <a>Manage Your Team</a>
+              <ul>
+                <li><a>Members</a></li>
+                <li><a>Plugins</a></li>
+                <li><a>Add a member</a></li>
+              </ul>
+            </li>
+            <li><a>Invitations</a></li>
+            <li><a>Cloud Storage Environment Settings</a></li>
+            <li><a>Authentication</a></li>
+          </ul>
+        </aside>
+      </div>
+
+      <!-- Right Side Content Area -->
+      <div class="column">
+        <h1 class="title">Main Content</h1>
+        <p>This area is designated for the main content. It's the part of the site where the actual page content goes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
             <div id="top-layer" class="top-layer">
                 <div id="top-left-layer" class="top-left-layer"></div>
                 <div id="top-center-layer" class="top-center-layer"></div>
