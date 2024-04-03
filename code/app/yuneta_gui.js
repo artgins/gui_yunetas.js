@@ -48,7 +48,8 @@
     /********************************************
      *  Load i18n
      ********************************************/
-    function setup_locale(self) {
+    function setup_locale(self)
+    {
         let locale = kw_get_local_storage_value("locale", "es", true);
 
         if (!self.config.locales[locale]) {
@@ -82,7 +83,8 @@
     /********************************************
      *
      ********************************************/
-    function build_remote_service(self) {
+    function build_remote_service(self)
+    {
         if ((window.location.hostname.indexOf("localhost") >= 0 ||
                 window.location.hostname.indexOf("127.") >= 0) ||
             empty_string(window.location.hostname)) {
@@ -136,7 +138,8 @@
     /********************************************
      *
      ********************************************/
-    function do_connect(self, jwt) {
+    function do_connect(self, jwt)
+    {
         __yuno__.__remote_service__.gobj_write_attr("jwt", jwt);
 
         /*
@@ -148,7 +151,8 @@
     /********************************************
      *
      ********************************************/
-    function close_all(self) {
+    function close_all(self)
+    {
         if (__yuno__.__remote_service__) {
             __yuno__.__remote_service__.gobj_stop_tree();
         }
@@ -160,7 +164,8 @@
     /********************************************
      *
      ********************************************/
-    function build_ui(self) {
+    function build_ui(self)
+    {
         self.config.gobj_login = self.yuno.gobj_create_service(
             "__login__",
             Login,
@@ -264,7 +269,8 @@
 
      *
      ********************************************/
-    function ac_on_open(self, event, kw, src) {
+    function ac_on_open(self, event, kw, src)
+    {
         /*----------------------------------------*
          *      Save backend roles
          *----------------------------------------*/
@@ -290,7 +296,8 @@
      }
 
      ********************************************/
-    function ac_on_close(self, event, kw, src) {
+    function ac_on_close(self, event, kw, src)
+    {
         self.gobj_publish_event(event, kw);
 
         // TODO use publish_event
@@ -305,9 +312,11 @@
     /********************************************
      *  From login.js
      ********************************************/
-    function ac_login_accepted(self, event, kw, src) {
+    function ac_login_accepted(self, event, kw, src)
+    {
         self.config.username = kw.username;
         let jwt = kw.jwt;
+        __yuno__.__ui_main__.set_username(self.config.username);
 
         /*---------------------------*
          *  Get roles
@@ -373,7 +382,9 @@
     /********************************************
      *  From login.js
      ********************************************/
-    function ac_login_denied(self, event, kw, src) {
+    function ac_login_denied(self, event, kw, src)
+    {
+        __yuno__.__ui_main__.set_username("");
         close_all(self);
         return 0;
     }
@@ -381,14 +392,17 @@
     /********************************************
      *  From login.js
      ********************************************/
-    function ac_login_refreshed(self, event, kw, src) {
+    function ac_login_refreshed(self, event, kw, src)
+    {
         return 0;
     }
 
     /********************************************
      *  From login.js
      ********************************************/
-    function ac_logout_done(self, event, kw, src) {
+    function ac_logout_done(self, event, kw, src)
+    {
+        __yuno__.__ui_main__.set_username("");
         close_all(self);
         return 0;
     }
@@ -396,7 +410,9 @@
     /********************************************
      *  Refused identity_card
      ********************************************/
-    function ac_id_refused(self, event, kw, src) {
+    function ac_id_refused(self, event, kw, src)
+    {
+        __yuno__.__ui_main__.set_username("");
         close_all(self);
         return 0;
     }
@@ -405,7 +421,8 @@
      *  We are subscribed to __gobj_ka_main__
      *  We manage spaces
      ********************************************/
-    function ac_resize(self, event, kw, src) {
+    function ac_resize(self, event, kw, src)
+    {
         // TODO use publish_event
         // if(self.config.gobj_ui_header) {
         //     self.config.gobj_ui_header.gobj_send_event(
@@ -499,7 +516,8 @@
     /************************************************
      *      Framework Method create
      ************************************************/
-    proto.mt_create = function (kw) {
+    proto.mt_create = function (kw)
+    {
         let self = this;
 
         setup_locale(self);
@@ -513,13 +531,15 @@
      *      In this point, all childs
      *      and subscriptions are already deleted.
      ************************************************/
-    proto.mt_destroy = function () {
+    proto.mt_destroy = function ()
+    {
     };
 
     /************************************************
      *      Framework Method start
      ************************************************/
-    proto.mt_start = function (kw) {
+    proto.mt_start = function (kw)
+    {
         let self = this;
         self.gobj_start_tree();
     };
@@ -527,7 +547,8 @@
     /************************************************
      *      Framework Method stop
      ************************************************/
-    proto.mt_stop = function (kw) {
+    proto.mt_stop = function (kw)
+    {
         let self = this;
     };
 
