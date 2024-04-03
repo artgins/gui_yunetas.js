@@ -227,15 +227,19 @@
 
         /*
          *  Menu "account"
+         *  change theme, username, account menu
          */
         jQuery("#top-right-layer").html(`
-            <span id="tag_username" class="tag">ginsmar@gmail.com</span>
+            ${html_change_theme()}
+            <span id="tag_username" class="tag"></span>
             <button class="button without-border">
                 <span class="icon is-medium is-responsive">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="${self.config.color_user_logout}" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
                 </span>
             </button>
         `);
+
+        themes();
 
         /*
          *  Center App Logo
@@ -269,9 +273,53 @@
     }
 
     /************************************************************
-     *
+     *  Color luna: #8156F5
+     *  Color sol: #FFB70F
      ************************************************************/
-    function sample_local(self) {
+    function html_change_theme(self)
+    {
+        return `
+        <div class="bd-nav-themes">
+            <button id="js-cycle" class="bd-cycle js-burger is-moon" data-target="js-themes">
+              <div class="bd-cycles">
+                <div class="bd-cycle-sun">
+                  <span class="icon">
+                    <i class="fas fa-lg fa-sun" aria-hidden="true"></i>
+                  </span>
+                </div>
+
+                <div class="bd-cycle-moon">
+                  <span class="icon">
+                    <i class="fas fa-lg fa-moon" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+            </button>
+
+            <div id="js-themes" class="bd-nav-menu is-cycles js-menu js-themes">
+              <button data-scheme="light" class="bd-nav-item is-sun" aria-label="Light mode">
+                <span class="icon">
+                  <i class="fas fa-sun" aria-hidden="true"></i>
+                </span>
+                <span>Light</span>
+              </button>
+
+              <button data-scheme="dark" class="bd-nav-item is-moon is-active" aria-label="Dark mode">
+                <span class="icon">
+                  <i class="fas fa-moon" aria-hidden="true"></i>
+                </span>
+                <span>Dark</span>
+              </button>
+
+              <button data-scheme="system" class="bd-nav-item is-system" aria-label="System mode">
+                <span class="icon">
+                  <i class="fas fa-desktop" aria-hidden="true"></i>
+                </span>
+                <span>System</span>
+              </button>
+            </div>
+          </div>
+        `;
     }
 
 
@@ -448,7 +496,5 @@
     //      Expose the class via the global object
     //=======================================================================
     exports.Ui_main = Ui_main;
-    exports.colorModes = colorModes;
-    exports.sizes = sizes;
 
 })(this);

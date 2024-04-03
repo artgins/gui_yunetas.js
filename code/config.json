@@ -35,6 +35,7 @@
         "app/yuneta_gui.js",
         "app/login.js",
         "app/ui/ui_main.js",
+        "app/ui/themes.js",
         "app/gf/gf_agents.js",
         "app/__yuno__.js"
     ]
