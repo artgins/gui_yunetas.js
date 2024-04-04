@@ -11,7 +11,7 @@
     scrollbar-width: none; /* Firefox */
     position: relative; /* Needed for absolute positioning of scroll buttons */
     flex-grow: 1;
-    margin: 0 2em; /* Reserve space for buttons */
+    margin: 0 1em; /* Reserve space for buttons */
     justify-content: space-between;
     align-items: center;
 }
@@ -36,7 +36,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 2em;
+    width: 1em;
     height: 2em;
     display: flex;
     align-items: center;

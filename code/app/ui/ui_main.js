@@ -362,14 +362,251 @@
 
 
 
-    /************************************************************
+    /************************************************
+     *  {
+     *      username:
+     *      password:
+     *  }
+     ************************************************/
+    function ac_do_login(self, event, kw, src)
+    {
+        let __login__ = self.yuno.gobj_find_service("__login__", true);
+        __login__.gobj_send_event("EV_DO_LOGIN", kw, self);
+
+        return 0;
+    }
+
+    /************************************************
      *
-     ************************************************************/
+     ************************************************/
+    function ac_do_logout(self, event, kw, src)
+    {
+        let __login__ = self.yuno.gobj_find_service("__login__", true);
+        __login__.gobj_send_event("EV_DO_LOGOUT", kw, self);
+        return 0;
+    }
+
+    /************************************************
+     *  {
+     *      username:
+     *      jwt:
+     *  }
+     ************************************************/
+    function ac_login_accepted(self, event, kw, src)
+    {
+        hide_login_form(self);
+
+        self.config._ka_user_menu_button.fill(self.config.color_user_login);
+        self.config.username = kw.username;
+        self.config._ka_user_name_label.setText(kw.username);
+        self.private._gobj_user_menu_popup.gobj_send_event("EV_ENABLE_ITEMS", ["logout"], self);
+        self.config.layer.draw();
+
+        return 0;
+    }
+
+    /************************************************
+     *
+     ************************************************/
+    function ac_login_refreshed(self, event, kw, src)
+    {
+        return 0;
+    }
+
+    /************************************************
+     *
+     ************************************************/
+    function ac_login_denied(self, event, kw, src)
+    {
+        hide_login_form(self);
+
+        self.config._ka_user_menu_button.fill(self.config.color_user_logout);
+        self.config.username = "";
+        self.config._ka_user_name_label.setText("Login");
+        self.private._gobj_user_menu_popup.gobj_send_event("EV_DISABLE_ITEMS", ["logout"], self);
+        self.config.layer.draw();
+
+        let error = kw_get_str(kw, "error", "login denied", false, false);
+        display_error_message(
+            t(error),
+            "Error",
+            function() {
+                if(empty_string(self.config.username)) {
+                    show_login_form(self);
+                }
+            }
+        );
+
+        return 0;
+    }
+
+    /************************************************
+     *
+     ************************************************/
+    function ac_logout_done(self, event, kw, src)
+    {
+        self.config._ka_user_menu_button.fill(self.config.color_user_logout);
+        self.config.username = "";
+        self.config._ka_user_name_label.setText("Login");
+        self.private._gobj_user_menu_popup.gobj_send_event("EV_DISABLE_ITEMS", ["logout"], self);
+        self.config.layer.draw();
+
+        show_login_form(self);
+
+        return 0;
+    }
+
+    /************************************************
+     *
+     ************************************************/
+    function ac_select_language(self, event, kw, src)
+     {
+        // src.gobj_send_event("EV_HIDE", {}, self); // TODO
+        return 0;
+    }
+
+    /************************************************
+     *
+     ************************************************/
+    function ac_app_menu(self, event, kw, src)
+    {
+        let element = kw.element; // button clicked
+
+        let position = {
+            x: element.absolutePosition().x + 0, //element.width()/4,
+            y: element.absolutePosition().y + element.height(),
+        };
+
+        if(self.private._connex_info_window) {
+            self.private._connex_info_window.destroy();
+            self.private._connex_info_window = null;
+        } else {
+            let editor = null;
+            self.private._connex_info_window = new w2window({
+                name: "connection_info",
+                title: t("connection info"),
+                x: 40,
+                y: 2,
+                width: 400,
+                height: 350,
+                onResized(ev) {
+                    if(editor && editor.setSize) {
+                        editor.setSize(
+                            ev.detail.body_rect.width,
+                            ev.detail.body_rect.height
+                        );
+                    }
+                },
+                onClose(ev) {
+                    editor && editor.destroy && editor.destroy();
+                    self.private._connex_info_window = null;
+                }
+            });
+            let target = self.private._connex_info_window.get_container();
+
+            if(target.length > 0) {
+                let props = {
+                    content: {
+                        json: self.private._connex_info
+                    },
+                    readOnly: true,
+                    navigationBar: false
+                };
+                editor = new JSONEditor({
+                    target: target[0],
+                    props: props
+                });
+                target.addClass("jse-theme-dark");
+
+                let font_family = "DejaVu Sans Mono, monospace";
+                let sz = adjust_font_size(16, font_family);
+                const root = document.querySelector(':root');
+
+                root.style.setProperty('--jse-font-size-mono', sz + 'px');
+                root.style.setProperty('--jse-font-family-mono', font_family);
+
+                query(self.private._connex_info_window.box).find(".w2ui-window-title").css({
+                    'font-size': self.private._text_size + 'px'
+                });
+                query(self.private._connex_info_window.box).find("span.w2ui-xicon").css({
+                    'font-size': sz + 'px'
+                });
+            }
+        }
+
+        if(self.private._gobj_app_menu_popup) {
+            self.private._gobj_app_menu_popup.gobj_send_event("EV_TOGGLE", position, self);
+        }
+
+        return 0;
+    }
+
+    /************************************************
+     *
+     ************************************************/
+    function ac_app_setup(self, event, kw, src)
+    {
+        if(self.private._gobj_app_setup_popup) {
+            self.private._gobj_app_setup_popup.gobj_send_event("EV_TOGGLE", {}, self);
+        }
+
+
+        return 0;
+    }
+
+    /************************************************
+     *
+     ************************************************/
+    function ac_user_menu(self, event, kw, src)
+    {
+        if(empty_string(self.config.username)) {
+            show_login_form(self);
+        } else {
+            let element = kw.element; // button clicked
+
+            let position = {
+                x: element.absolutePosition().x + element.width(),
+                y: element.absolutePosition().y + element.height(),
+            };
+            if(self.private._gobj_user_menu_popup) {
+                self.private._gobj_user_menu_popup.gobj_send_event("EV_TOGGLE", position, self);
+            }
+        }
+
+        return 0;
+    }
+
+    /********************************************
+     *  Connected to yuneta
+     ********************************************/
+    function ac_info_connected(self, event, kw, src)
+    {
+        self.private._connex_info = kw;
+        self.config._ka_app_menu_button.fill(self.config.color_yuneta_connected);
+        self.config.layer.draw();
+    }
+
+    /********************************************
+     *  Disconnected from yuneta
+     ********************************************/
+    function ac_info_disconnected(self, event, kw, src)
+    {
+        self.config._ka_app_menu_button.fill(self.config.color_yuneta_disconnected);
+        self.config.layer.draw();
+    }
+
+    /************************************************
+     *
+     ************************************************/
     function ac_timeout(self, event, kw, src)
     {
-        // trace_msg("ac_timeout");
-        //self.set_timeout(1*1000);
-            return 0;
+        // self.gobj_send_event("EV_USER_MENU", {element: self.config._ka_user_menu_button}, self);
+        // self.set_timeout(100);
+
+        if(empty_string(self.config.username)) {
+            show_login_form(self);
+        }
+        return 0;
     }
 
 
@@ -384,14 +621,40 @@
 
     let FSM = {
         "event_list": [
+            "EV_LOGIN_ACCEPTED: input",
+            "EV_LOGIN_DENIED: input",
+            "EV_LOGIN_REFRESHED: input",
+            "EV_LOGOUT_DONE: input",
+            "EV_DO_LOGIN",
+            "EV_DO_LOGOUT",
+            "EV_SELECT_LANGUAGE",
+            "EV_APP_MENU",
+            "EV_APP_SETUP",
+            "EV_USER_MENU",
+            "EV_USER_SETUP",
+            "EV_INFO_CONNECTED",
+            "EV_INFO_DISCONNECTED",
             "EV_TIMEOUT"
-        ],
+       ],
         "state_list": [
             "ST_IDLE"
         ],
         "machine": {
             "ST_IDLE":
             [
+                ["EV_LOGIN_ACCEPTED",       ac_login_accepted,      undefined],
+                ["EV_LOGIN_DENIED",         ac_login_denied,        undefined],
+                ["EV_LOGIN_REFRESHED",      ac_login_refreshed,     undefined],
+                ["EV_LOGOUT_DONE",          ac_logout_done,         undefined],
+                ["EV_DO_LOGIN",             ac_do_login,            undefined],
+                ["EV_DO_LOGOUT",            ac_do_logout,           undefined],
+                ["EV_SELECT_LANGUAGE",      ac_select_language,     undefined],
+                ["EV_APP_MENU",             ac_app_menu,            undefined],
+                ["EV_APP_SETUP",            ac_app_setup,           undefined],
+                ["EV_USER_MENU",            ac_user_menu,           undefined],
+                ["EV_USER_SETUP",           ac_user_menu,           undefined], // No user_setup by now
+                ["EV_INFO_CONNECTED",       ac_info_connected,      undefined],
+                ["EV_INFO_DISCONNECTED",    ac_info_disconnected,   undefined],
                 ["EV_TIMEOUT",              ac_timeout,             undefined]
             ]
         }
