@@ -105,28 +105,5 @@
             <script src="${url}"></script>
             % endfor
         % endif
-
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const themeSelector = document.getElementById('theme-selector');
-
-                const applyTheme = (theme) => {
-                  document.documentElement.setAttribute("data-theme", theme);
-                };
-
-                // Listen for changes on the theme selector
-                if(themeSelector) {
-                    themeSelector.addEventListener('change', (e) => {
-                      const selectedTheme = e.target.value;
-                      localStorage.setItem('theme', selectedTheme); // Save theme preference
-                      applyTheme(selectedTheme);
-                    });
-                }
-
-                // Initialize theme on load
-                const savedTheme = localStorage.getItem('theme') || 'light';
-                applyTheme(savedTheme);
-        });
-        </script>
     </body>
 </html>

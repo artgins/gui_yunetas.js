@@ -570,6 +570,9 @@
      ************************************************/
     function ac_change_theme(self, event, kw, src)
     {
+        let theme = 'dark';
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem('theme', theme); // Save theme preference
         return 0;
     }
 

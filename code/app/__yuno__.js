@@ -100,6 +100,12 @@
         return r?r:null;
     });
 
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initialize theme on load
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute("data-theme", savedTheme);
+    });
+
     /************************************************
      *          Expose to the global object
      ************************************************/
