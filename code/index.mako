@@ -62,6 +62,7 @@
                 height: var(--yui-top-layer-size);
                 overflow: hidden;
                 z-index: 1000;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             }
             .yui-content-layer {
                 position: absolute;
@@ -77,6 +78,7 @@
                 height: var(--yui-bottom-layer-size);
                 overflow: hidden;
                 z-index:1000;
+                border-top: 1px solid rgba(0, 0, 0, 0.08);
             }
             .yui-modal-layer {
                 position: fixed;
