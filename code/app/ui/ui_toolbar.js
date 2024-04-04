@@ -12,35 +12,6 @@
  */
 function yui_toolbar(parent, id="", clase="", items=[])
 {
-    let left_items = '<div class="yui-horizontal-toolbar-section">';
-    let center_items = '<div class="yui-horizontal-toolbar-section">';
-    let right_items = '<div class="yui-horizontal-toolbar-section">';
-
-    for(let i=0; i<items.length; i++) {
-        let position = items[i].position || "left";
-        let html = items[i].html || "";
-        let callback = (items[i].callback && (typeof items[i].callback === 'function'))?items[i].callback:null;
-        if(!html) {
-            continue;
-        }
-        switch(position) {
-            case 'center':
-                center_items += html;
-                break;
-            case 'right':
-                right_items += html;
-                break;
-            case 'left':
-            default:
-                left_items += html;
-                break;
-        }
-    }
-
-    left_items += "</div>";
-    center_items += "</div>";
-    right_items += "</div>";
-
     let $template = jQuery(`
         <div ${id?`id="${id}"`:''} class="yui-horizontal-toolbar ${clase?clase:''}">
             <button class="yui-horizontal-toolbar-scroll-btn left">
@@ -58,9 +29,35 @@ function yui_toolbar(parent, id="", clase="", items=[])
     `);
 
     let $container = $template.find('.yui-horizontal-toolbar-container');
-    $container.append(jQuery(left_items));
-    $container.append(jQuery(center_items));
-    $container.append(jQuery(right_items));
+
+    let $left_items = jQuery('<div class="yui-horizontal-toolbar-section"/>');
+    let $center_items = jQuery('<div class="yui-horizontal-toolbar-section"/>');
+    let $right_items = jQuery('<div class="yui-horizontal-toolbar-section"/>');
+
+    for(let i=0; i<items.length; i++) {
+        let position = items[i].position || "left";
+        let html = items[i].html || "";
+        let callback = (items[i].callback && (typeof items[i].callback === 'function'))?items[i].callback:null;
+        if(!html) {
+            continue;
+        }
+        switch(position) {
+            case 'center':
+                $center_items.append(jQuery(html));
+                break;
+            case 'right':
+                $right_items.append(jQuery(html));
+                break;
+            case 'left':
+            default:
+                $left_items.append(jQuery(html));
+                break;
+        }
+    }
+
+    $container.append($left_items);
+    $container.append($center_items);
+    $container.append($right_items);
 
     const $toolbar = jQuery(parent).append($template);
     const container = $container.get(0);
