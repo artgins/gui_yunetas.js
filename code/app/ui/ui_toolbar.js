@@ -7,6 +7,7 @@
  *  item: {
  *      position: 'left' | 'center' | 'right',
  *      html: 'html-string',
+ *      browser_event: '', // 'click', etc
  *      callback: function()
  *  }
  */
@@ -37,21 +38,26 @@ function yui_toolbar(parent, id="", clase="", items=[])
     for(let i=0; i<items.length; i++) {
         let position = items[i].position || "left";
         let html = items[i].html || "";
+        let browser_event = items[i].browser_event || "click";
         let callback = (items[i].callback && (typeof items[i].callback === 'function'))?items[i].callback:null;
         if(!html) {
             continue;
         }
+        let $item = null;
         switch(position) {
             case 'center':
-                $center_items.append(jQuery(html));
+                $item = $center_items.append(jQuery(html));
                 break;
             case 'right':
-                $right_items.append(jQuery(html));
+                $item = $right_items.append(jQuery(html));
                 break;
             case 'left':
             default:
-                $left_items.append(jQuery(html));
+                $item = $left_items.append(jQuery(html));
                 break;
+        }
+        if($item && callback) {
+            $item.on(browser_event, callback);
         }
     }
 

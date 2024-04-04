@@ -219,7 +219,9 @@
             {
                 description: "App Menu",
                 position: "left",
-                callback: "",
+                callback: function() {
+                    self.gobj_send_event("EV_APP_MENU", {}, self);
+                },
                 html: `
                     <div class="">
                         <button class="button without-border">
@@ -238,7 +240,9 @@
             {
                 description: "Center App Logo",
                 position: "center",
-                callback: "",
+                callback: function() {
+                    self.gobj_send_event("EV_HOME", {}, self);
+                },
                 html: `
                     <div class="buttons">
                         <figure class="" style="padding-top: 4px; width: 80px; height: 38px;">
@@ -250,7 +254,9 @@
             {
                 description: "Change theme, Username, Account menu",
                 position: "right",
-                callback: "",
+                callback: function() {
+                    self.gobj_send_event("EV_USER_MENU", {}, self);
+                },
                 html: `
                     <div class="">
                         <button class="button without-border">
@@ -394,7 +400,7 @@
      ************************************************/
     function ac_login_accepted(self, event, kw, src)
     {
-        hide_login_form(self);
+        //hide_login_form(self);
 
         self.config._ka_user_menu_button.fill(self.config.color_user_login);
         self.config.username = kw.username;
@@ -418,7 +424,7 @@
      ************************************************/
     function ac_login_denied(self, event, kw, src)
     {
-        hide_login_form(self);
+        //hide_login_form(self);
 
         self.config._ka_user_menu_button.fill(self.config.color_user_logout);
         self.config.username = "";
@@ -432,7 +438,7 @@
             "Error",
             function() {
                 if(empty_string(self.config.username)) {
-                    show_login_form(self);
+                    // show_login_form(self);
                 }
             }
         );
@@ -451,7 +457,7 @@
         self.private._gobj_user_menu_popup.gobj_send_event("EV_DISABLE_ITEMS", ["logout"], self);
         self.config.layer.draw();
 
-        show_login_form(self);
+        //show_login_form(self);
 
         return 0;
     }
@@ -471,6 +477,8 @@
     function ac_app_menu(self, event, kw, src)
     {
         let element = kw.element; // button clicked
+
+        return 0;
 
         let position = {
             x: element.absolutePosition().x + 0, //element.width()/4,
@@ -498,7 +506,9 @@
                     }
                 },
                 onClose(ev) {
-                    editor && editor.destroy && editor.destroy();
+                    if(editor && editor.destroy) {
+                        editor.destroy();
+                    }
                     self.private._connex_info_window = null;
                 }
             });
@@ -544,13 +554,8 @@
     /************************************************
      *
      ************************************************/
-    function ac_app_setup(self, event, kw, src)
+    function ac_home(self, event, kw, src)
     {
-        if(self.private._gobj_app_setup_popup) {
-            self.private._gobj_app_setup_popup.gobj_send_event("EV_TOGGLE", {}, self);
-        }
-
-
         return 0;
     }
 
@@ -560,7 +565,7 @@
     function ac_user_menu(self, event, kw, src)
     {
         if(empty_string(self.config.username)) {
-            show_login_form(self);
+            // show_login_form(self);
         } else {
             let element = kw.element; // button clicked
 
@@ -584,6 +589,7 @@
         self.private._connex_info = kw;
         self.config._ka_app_menu_button.fill(self.config.color_yuneta_connected);
         self.config.layer.draw();
+        return 0;
     }
 
     /********************************************
@@ -593,6 +599,7 @@
     {
         self.config._ka_app_menu_button.fill(self.config.color_yuneta_disconnected);
         self.config.layer.draw();
+        return 0;
     }
 
     /************************************************
@@ -604,7 +611,7 @@
         // self.set_timeout(100);
 
         if(empty_string(self.config.username)) {
-            show_login_form(self);
+            // show_login_form(self);
         }
         return 0;
     }
@@ -629,9 +636,8 @@
             "EV_DO_LOGOUT",
             "EV_SELECT_LANGUAGE",
             "EV_APP_MENU",
-            "EV_APP_SETUP",
+            "EV_HOME",
             "EV_USER_MENU",
-            "EV_USER_SETUP",
             "EV_INFO_CONNECTED",
             "EV_INFO_DISCONNECTED",
             "EV_TIMEOUT"
@@ -650,9 +656,8 @@
                 ["EV_DO_LOGOUT",            ac_do_logout,           undefined],
                 ["EV_SELECT_LANGUAGE",      ac_select_language,     undefined],
                 ["EV_APP_MENU",             ac_app_menu,            undefined],
-                ["EV_APP_SETUP",            ac_app_setup,           undefined],
+                ["EV_HOME",                 ac_home,                undefined],
                 ["EV_USER_MENU",            ac_user_menu,           undefined],
-                ["EV_USER_SETUP",           ac_user_menu,           undefined], // No user_setup by now
                 ["EV_INFO_CONNECTED",       ac_info_connected,      undefined],
                 ["EV_INFO_DISCONNECTED",    ac_info_disconnected,   undefined],
                 ["EV_TIMEOUT",              ac_timeout,             undefined]

@@ -23,7 +23,7 @@
      *  1: without kw details
      *  2: with kw details.
      */
-    let tracing = 0;
+    let tracing = 1;
     let trace_timer = 0;
 
     /*
