@@ -2,12 +2,12 @@
  *      Layers
  *********************************************************/
 :root {
-    --top-layer-size: 40px;
-    --bottom-layer-size: 40px;
-    --left-layer-size: 40px;
-    --right-layer-size: 40px;
-    --main-content-margin-size: 5px;
-    --main-content-padding-size: 5px;
+    /*--top-layer-size: 40px;*/
+    /*--bottom-layer-size: 40px;*/
+    /*--left-layer-size: 40px;*/
+    /*--right-layer-size: 40px;*/
+    /*--main-content-margin-size: 5px;*/
+    /*--main-content-padding-size: 5px;*/
 }
 
 .top-layer {
@@ -202,5 +202,5 @@ html, body {
     margin: 0;
     padding: 0;
     overscroll-behavior: contain;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }

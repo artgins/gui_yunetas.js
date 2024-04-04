@@ -41,108 +41,62 @@
         <script src="${url}"></script>
             % endfor
         % endif
+
+        <style>
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overscroll-behavior: contain;
+            }
+
+            :root {
+                --yui-top-layer-size: 2.5em;
+                --yui-bottom-layer-size: 2.5em;
+            }
+            .yui-top-layer {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                height: var(--yui-top-layer-size);
+                overflow: hidden;
+                z-index: 1000;
+            }
+            .yui-content-layer {
+                position: absolute;
+                top: var(--yui-top-layer-size);
+                bottom: var(--yui-bottom-layer-size);
+                width: 100%;
+                height: calc(100% - var(--yui-top-layer-size) - var(--yui-bottom-layer-size));
+            }
+            .yui-bottom-layer {
+                position: fixed;
+                bottom:0;
+                width:100%;
+                height: var(--yui-bottom-layer-size);
+                overflow: hidden;
+                z-index:1000;
+            }
+            .yui-modal-layer {
+                position: fixed;
+                width:100%;
+                height:100%;
+                top:0;
+                left:0;
+                background-color:rgba(0,0,0,0.3);
+                display:none;
+                z-index:1001;
+            }
+
+        </style>
+
     </head>
     <body>
-        <div id="root">
-
-<div class="toolbar">
-  <div class="toolbar-section left">
-    <!-- Place left items here -->
-    <span>Left Item 1</span>
-    <span>Left Item 2</span>
-  </div>
-  <div class="toolbar-section center">
-    <!-- Place center items here -->
-    <span>Center Item 1</span>
-    <span>Center Item 2</span>
-  </div>
-  <div class="toolbar-section right">
-    <!-- Place right items here -->
-    <span>Right Item 1</span>
-    <span>Right Item 2</span>
-  </div>
-</div>
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bulma Page Layout</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
-</head>
-<body>
-
-<!-- Main Content -->
-<section class="section">
-  <div class="container">
-    <div class="columns">
-
-      <!-- Left Side Menu -->
-      <div class="column is-one-quarter">
-        <aside class="menu">
-          <p class="menu-label">General</p>
-          <ul class="menu-list">
-            <li><a>Dashboard</a></li>
-            <li><a>Customers</a></li>
-          </ul>
-          <p class="menu-label">Administration</p>
-          <ul class="menu-list">
-            <li><a>Team Settings</a></li>
-            <li>
-              <a>Manage Your Team</a>
-              <ul>
-                <li><a>Members</a></li>
-                <li><a>Plugins</a></li>
-                <li><a>Add a member</a></li>
-              </ul>
-            </li>
-            <li><a>Invitations</a></li>
-            <li><a>Cloud Storage Environment Settings</a></li>
-            <li><a>Authentication</a></li>
-          </ul>
-        </aside>
-      </div>
-
-      <!-- Right Side Content Area -->
-      <div class="column">
-        <h1 class="title">Main Content</h1>
-        <p>This area is designated for the main content. It's the part of the site where the actual page content goes.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-
-
-
-
-
-
-            <div id="top-layer" class="top-layer">
-                <div id="top-left-layer" class="top-left-layer"></div>
-                <div id="top-center-layer" class="top-center-layer"></div>
-                <div id="top-right-layer" class="top-right-layer"></div>
-            </div>
-
-            <div id="bottom-layer" class="bottom-layer">
-                <div id="bottom-left-layer" class="bottom-left-layer"></div>
-                <div id="bottom-center-layer" class="bottom-center-layer"></div>
-                <div id="bottom-right-layer" class="bottom-right-layer"></div>
-            </div>
-
-            <div id="left-layer" class="left-layer">
-            </div>
-            <div id="right-layer" class="right-layer">
-            </div>
-            <div id="main-content" class="main-content">
-            </div>
-        </div>
+        <div id="yui-top-layer" class="yui-top-layer"></div>
+        <div id="yui-content-layer" class="yui-content-layer"></div>
+        <div id="yui-bottom-layer" class="yui-bottom-layer"></div>
+        <div id="yui-modal-layer" class=yui-modal-layer"></div>
 
         % if 'bottom_js' in assets_env:
             % for url in assets_env['bottom_js']:
@@ -150,28 +104,27 @@
             % endfor
         % endif
 
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const themeSelector = document.getElementById('theme-selector');
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const themeSelector = document.getElementById('theme-selector');
 
-        const applyTheme = (theme) => {
-          document.documentElement.setAttribute("data-theme", theme);
-        };
+                const applyTheme = (theme) => {
+                  document.documentElement.setAttribute("data-theme", theme);
+                };
 
-        // Listen for changes on the theme selector
-        if(themeSelector) {
-            themeSelector.addEventListener('change', (e) => {
-              const selectedTheme = e.target.value;
-              localStorage.setItem('theme', selectedTheme); // Save theme preference
-              applyTheme(selectedTheme);
-            });
-        }
+                // Listen for changes on the theme selector
+                if(themeSelector) {
+                    themeSelector.addEventListener('change', (e) => {
+                      const selectedTheme = e.target.value;
+                      localStorage.setItem('theme', selectedTheme); // Save theme preference
+                      applyTheme(selectedTheme);
+                    });
+                }
 
-        // Initialize theme on load
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        applyTheme(savedTheme);
-    });
-
-    </script>
+                // Initialize theme on load
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                applyTheme(savedTheme);
+        });
+        </script>
     </body>
 </html>
