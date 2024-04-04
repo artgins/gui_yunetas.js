@@ -229,6 +229,17 @@
                                 <svg id="icon-state-yuneta" viewBox="0 0 448 512"><path fill="${self.config.color_yuneta_disconnected}" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
                             </span>
                         </button>
+                    </div>
+                `
+            },
+            {
+                description: "App Menu",
+                position: "left",
+                callback: function() {
+                    self.gobj_send_event("EV_APP_MENU", {}, self);
+                },
+                html: `
+                    <div class="">
                         <button class="button without-border">
                             <span style="width:1.5em;height:1.5em">
                                 <svg id="icon-state-yuneta" viewBox="0 0 448 512"><path fill="${self.config.color_yuneta_disconnected}" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
@@ -252,10 +263,10 @@
                 `
             },
             {
-                description: "Change theme, Username, Account menu",
+                description: "Change theme",
                 position: "right",
                 callback: function() {
-                    self.gobj_send_event("EV_USER_MENU", {}, self);
+                    self.gobj_send_event("EV_CHANGE_THEME", {}, self);
                 },
                 html: `
                     <div class="">
@@ -264,6 +275,17 @@
                                 <i class="fas fa-lg fa-sun"></i>
                             </span>
                         </button>
+                    </div>
+                `
+            },
+            {
+                description: "Username, Account menu",
+                position: "right",
+                callback: function() {
+                    self.gobj_send_event("EV_USER_MENU", {}, self);
+                },
+                html: `
+                    <div class="">
                         <span id="tag_username" class="tag">pepe@xxx.com</span>
                         <button class="button without-border">
                             <span style="width:1.5em;height:1.5em">
@@ -562,6 +584,14 @@
     /************************************************
      *
      ************************************************/
+    function ac_change_theme(self, event, kw, src)
+    {
+        return 0;
+    }
+
+    /************************************************
+     *
+     ************************************************/
     function ac_user_menu(self, event, kw, src)
     {
         if(empty_string(self.config.username)) {
@@ -637,6 +667,7 @@
             "EV_SELECT_LANGUAGE",
             "EV_APP_MENU",
             "EV_HOME",
+            "EV_CHANGE_THEME",
             "EV_USER_MENU",
             "EV_INFO_CONNECTED",
             "EV_INFO_DISCONNECTED",
@@ -657,6 +688,7 @@
                 ["EV_SELECT_LANGUAGE",      ac_select_language,     undefined],
                 ["EV_APP_MENU",             ac_app_menu,            undefined],
                 ["EV_HOME",                 ac_home,                undefined],
+                ["EV_CHANGE_THEME",         ac_change_theme,        undefined],
                 ["EV_USER_MENU",            ac_user_menu,           undefined],
                 ["EV_INFO_CONNECTED",       ac_info_connected,      undefined],
                 ["EV_INFO_DISCONNECTED",    ac_info_disconnected,   undefined],

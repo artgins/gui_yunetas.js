@@ -46,26 +46,31 @@ function yui_toolbar(parent, id="", clase="", items=[])
         let $item = null;
         switch(position) {
             case 'center':
-                $item = $center_items.append(jQuery(html));
+                $item = jQuery(html).appendTo($center_items);
                 break;
             case 'right':
-                $item = $right_items.append(jQuery(html));
+                $item = jQuery(html).appendTo($right_items);
                 break;
             case 'left':
             default:
-                $item = $left_items.append(jQuery(html));
+                $item = jQuery(html).appendTo($left_items);
                 break;
         }
         if($item && callback) {
-            $item.on(browser_event, callback);
+            $item.data("callback", callback);
+            $item.on(browser_event, function(evt) {
+                if (evt.stopPropagation) {evt.stopPropagation();} else {evt.cancelBubble = true;}
+                if (evt.preventDefault) {evt.preventDefault();} else {return false;}
+                callback(items[i]);
+            });
         }
     }
 
-    $container.append($left_items);
-    $container.append($center_items);
-    $container.append($right_items);
+    $left_items.appendTo($container);
+    $center_items.appendTo($container);
+    $right_items.appendTo($container);
 
-    const $toolbar = jQuery(parent).append($template);
+    const $toolbar = $template.appendTo(jQuery(parent));
     const container = $container.get(0);
     const $leftBtn = $toolbar.find('.yui-horizontal-toolbar-scroll-btn.left');
     const $rightBtn = $toolbar.find('.yui-horizontal-toolbar-scroll-btn.right');
