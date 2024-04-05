@@ -71,11 +71,39 @@
      ************************************************************/
     function build_ui(self)
     {
+        /*---------------------------------------*
+         *      Top toolbar
+         *---------------------------------------*/
+        build_top_toolbar(self);
+
+        /*---------------------------------------*
+         *      Bottom toolbar
+         *---------------------------------------*/
+        build_bottom_toolbar(self);
+
+        /*---------------------------------------*
+         *      Work area
+         *---------------------------------------*/
+
+        /*---------------------------------------*
+         *      Set initial state
+         *---------------------------------------*/
+    }
+
+    /************************************************************
+     *
+     ************************************************************/
+    function build_top_toolbar(self)
+    {
         let image_file = sprintf("%s/static/app/images/app-logo.png",
             get_location_path_root() // get dirName of window.location.pathname
         );
-
-        yui_toolbar("#yui-top-layer", "", "", [
+        yui_toolbar(
+            "#yui-top-layer",   // parent
+            "",                 // id
+            "",                 // class
+            "border-bottom: 1px solid rgba(0, 0, 0, 0.08);", // style
+            [
             {
                 description: "App Menu",
                 position: "left",
@@ -85,9 +113,7 @@
                 html: `
                     <div class="">
                         <button class="button without-border">
-                            <span style="width:1.5em;height:1.5em">
-                                <svg id="icon-state-yuneta" viewBox="0 0 448 512"><path fill="${self.config.color_yuneta_disconnected}" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
-                            </span>
+                            <svg id="icon-state-yuneta" width="1.5em" height="1.5em" viewBox="0 0 448 512"><path fill="${self.config.color_yuneta_disconnected}" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
                         </button>
                     </div>
                 `
@@ -113,27 +139,13 @@
                     self.gobj_send_event("EV_CHANGE_THEME", {}, self);
                 },
                 html: `
-<!--                    <div class="">-->
-                        <button id="theme-change" class="button without-border" style="width:2em;height:2em">
-<!--                            <span style="width:1.5em;height:1.5em">-->
-
-<span class="icon theme-light" style="display:none; color:#FFB70F">
-    <i class="fas fa-lg fa-sun" aria-hidden="true"></i>
-</span>
-<span class="icon theme-dark" style="display:none; color:#8156F5">
-    <i class="fas fa-lg fa-moon" aria-hidden="true"></i>
-</span>
-<span class="icon theme-system" style="display:none; color:#3C9D72">
-    <i class="fas fa-circle-half-stroke" aria-hidden="true"></i>
-</span>
-
-
-<!--                                <svg class="theme-system" style="display:none;" fill="#3C9D72" viewBox="0 0 512 512"><path d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/></svg>-->
-<!--                                <svg class="theme-dark" style="display:none;" fill="#8156F5" viewBox="0 0 384 512"><path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"/></svg>-->
-<!--                                <svg class="theme-light" style="display:flex;" fill="#FFB70F" viewBox="0 0 512 512"><path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/></svg>-->
-<!--                            </span>-->
+                    <div class="">
+                        <button id="theme-change" class="button without-border">
+                            <svg class="theme-system" width="1.5em" height="1.5em" style="display:none;" fill="#3C9D72" viewBox="0 0 512 512"><path d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/></svg>
+                            <svg class="theme-dark" width="1.5em" height="1.5em" style="display:none;" fill="#8156F5" viewBox="0 0 384 512"><path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"/></svg>
+                            <svg class="theme-light" width="1.5em" height="1.5em" style="display:none;" fill="#FFB70F" viewBox="0 0 512 512"><path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/></svg>
                         </button>
-<!--                    </div>-->
+                    </div>
                 `
             },
             {
@@ -147,45 +159,50 @@
                         <span id="tag_username" class="tag">pepe@xxx.com</span>
                         <button class="button without-border">
                             <span style="width:1.5em;height:1.5em">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="${self.config.color_user_logout}" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+                                <svg viewBox="0 0 448 512" width="1.5em" height="1.5em" ><path fill="${self.config.color_user_logout}" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
                             </span>
                         </button>
                     </div>
                 `
             },
         ]);
+    }
 
-        /*---------------------------------------*
-         *      Top toolbar elements
-         *---------------------------------------*/
+    /************************************************************
+     *
+     ************************************************************/
+    function build_bottom_toolbar(self)
+    {
+        yui_toolbar(
+            "#yui-bottom-layer",   // parent
+            "",                 // id
+            "",                 // class
+            "border-top: 1px solid rgba(0, 0, 0, 0.08);", // style
+            [
+        ]);
+    }
 
-        /*
-         *  Center App Logo
-         */
+    /************************************************************
+     *   Set theme
+     ************************************************************/
+    function set_theme(theme) {
+        let $svg = jQuery("#theme-change svg");
+        $svg.css('display', 'none');
 
-        /*
-         *  Menu "account"
-         *
-         */
-
-        //themes();
-
-        /*---------------------------------------*
-         *      Top toolbar
-         *      Menu "account" (user)
-         *---------------------------------------*/
-
-        /*---------------------------------------*
-         *      Bottom toolbar
-         *---------------------------------------*/
-
-        /*---------------------------------------*
-         *      Work area
-         *---------------------------------------*/
-
-        /*---------------------------------------*
-         *      Set initial state
-         *---------------------------------------*/
+        switch (theme) {
+            case 'dark':
+                $svg = jQuery("#theme-change svg.theme-dark");
+                break;
+            case 'system':
+                $svg = jQuery("#theme-change svg.theme-system");
+                break;
+            case 'light':
+            default:
+                $svg = jQuery("#theme-change svg.theme-light");
+                break;
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+        $svg.css('display', 'flex');
     }
 
 
@@ -396,9 +413,6 @@
     {
         let current_theme = localStorage.getItem('theme') || 'light';
 
-        let $svg = jQuery("#theme-change span");
-        $svg.css('display', 'none');
-
         let new_theme;
         switch(current_theme) {
             case 'dark':
@@ -413,21 +427,7 @@
                 break;
         }
 
-        switch(new_theme) {
-            case 'dark':
-                $svg = jQuery("#theme-change span.theme-dark");
-                break;
-            case 'system':
-                $svg = jQuery("#theme-change span.theme-system");
-                break;
-            case 'light':
-            default:
-                $svg = jQuery("#theme-change span.theme-light");
-                break;
-        }
-        document.documentElement.setAttribute("data-theme", new_theme);
-        $svg.css('display', 'flex');
-
+        set_theme(new_theme);
         localStorage.setItem('theme', new_theme); // Save theme preference
 
         return 0;
@@ -575,6 +575,9 @@
         let self = this;
 
         build_ui(self);
+
+        let current_theme = localStorage.getItem('theme') || 'light';
+        set_theme(current_theme);
 
         if(self.config.subscriber) {
             self.gobj_subscribe_event(null, {}, self.config.subscriber);

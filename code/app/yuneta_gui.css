@@ -16,13 +16,13 @@
 [data-theme=light],
 .theme-light {
     /* CSS Variables */
-    background-color: #EEEEEE;
+    /*background-color: #EEEEEE;*/
 }
 
 [data-theme=dark],
 .theme-dark {
     /* CSS Variables */
-    background-color: black;
+    /*background-color: black;*/
 }
 
 /*********************************************************

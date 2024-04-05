@@ -52,8 +52,8 @@
             }
 
             :root {
-                --yui-top-layer-size: 2.5em;
-                --yui-bottom-layer-size: 2.5em;
+                --yui-top-layer-size: 2.6em;
+                --yui-bottom-layer-size: 2.6em;
             }
             .yui-top-layer {
                 position: fixed;
@@ -62,7 +62,6 @@
                 height: var(--yui-top-layer-size);
                 overflow: hidden;
                 z-index: 1000;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             }
             .yui-content-layer {
                 position: absolute;
@@ -78,7 +77,6 @@
                 height: var(--yui-bottom-layer-size);
                 overflow: hidden;
                 z-index:1000;
-                border-top: 1px solid rgba(0, 0, 0, 0.08);
             }
             .yui-modal-layer {
                 position: fixed;
