@@ -187,7 +187,7 @@
      *
      ************************************************************/
     function build_work_area(self) {
-        let html = `\
+        let html = `
             <div id="yui-main-content" class="yui-main-content" 
                 ><div id="yui-menu-column" class="yui-menu-column"
                 ></div
@@ -195,7 +195,78 @@
                 ></div
             ></div>
         `;
-        let $item = jQuery(html).appendTo(document.querySelector('#yui-content-layer'));
+        jQuery(html).appendTo(document.querySelector('#yui-content-layer'));
+
+        html = `
+            <aside class="menu">
+            <ul class="menu-list">
+                <li>
+                    <a class="is-active">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-home"></i></span
+                            ><span class="is-hidden-mobile">Messages</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-user"></i></span
+                            ><span class="is-hidden-mobile">Profile</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-envelope"></i></span
+                            ><span class="is-hidden-mobile">Messages</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-cog"></i></span
+                            ><span class="is-hidden-mobile">Settings</span>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            </aside>
+        `;
+        jQuery(html).appendTo(document.querySelector('#yui-menu-column'));
+
+        function adjustMenuWidth() {
+            const menuItems = document.querySelectorAll('#yui-menu-column li a span');
+            let maxWidth = 0;
+
+            // Iterate over menu items to find the maximum width
+            menuItems.forEach(item => {
+                //const width = item.getBoundingClientRect().width;
+                //const width = item.offsetWidth;
+                let width = 0;
+                const lineItems = item.querySelectorAll('span');
+                lineItems.forEach(item2 => {
+                    width += item2.getBoundingClientRect().width;
+                });
+
+                if (width > maxWidth) {
+                    maxWidth = width; // Update maxWidth if current item's width is larger
+                }
+                trace_msg(`maxWidth: ${maxWidth}, width: ${width}x`);
+            });
+
+            // Set the menu column width to the maxWidth plus some padding
+            const menuColumn = document.querySelector('#yui-menu-column');
+            if (menuColumn) {
+                menuColumn.style.width = `${maxWidth + 30}px`; // Add 30px padding
+            }
+        }
+
+        // window.addEventListener('resize', debounce(adjustMenuWidth, 100));
+        window.addEventListener('resize', adjustMenuWidth);
+        adjustMenuWidth();
     }
 
     /************************************************************
@@ -222,9 +293,13 @@
     }
 
 
-    /***************************
-     *      Actions
-     ***************************/
+
+
+                    /***************************
+                     *      Actions
+                     ***************************/
+
+
 
 
     /************************************************
@@ -233,7 +308,8 @@
      *      password:
      *  }
      ************************************************/
-    function ac_do_login(self, event, kw, src) {
+    function ac_do_login(self, event, kw, src)
+    {
         let __login__ = self.yuno.gobj_find_service("__login__", true);
         __login__.gobj_send_event("EV_DO_LOGIN", kw, self);
 

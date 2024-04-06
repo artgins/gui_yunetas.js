@@ -17,13 +17,13 @@ function yui_toolbar(parent, id="", clase="", style="", items=[])
         <div ${id?`id="${id}"`:''} ${style?`style="${style}"`:''} class="yui-horizontal-toolbar ${clase?clase:''}">
             <button class="yui-horizontal-toolbar-scroll-btn left">
                 <span class="has-text-primary">
-                <svg viewBox="0 0 320 512"><path class="fa-secondary" opacity=".4" d="M41.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l160-160c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L109.3 256 246.6 393.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0l-160-160z"/><path class="fa-primary" d=""/></svg>
+                <svg viewBox="0 0 320 512" style="fill:var(--bulma-text)"><path class="fa-secondary" opacity=".4" d="M41.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l160-160c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L109.3 256 246.6 393.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0l-160-160z"/><path class="fa-primary" d=""/></svg>
                 </span>
             </button>
             <div class="yui-horizontal-toolbar-container"></div>
             <button class="yui-horizontal-toolbar-scroll-btn right">
                 <span class="has-text-primary">
-                <svg viewBox="0 0 320 512"><path class="fa-secondary" opacity=".4" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/><path class="fa-primary" d=""/></svg>
+                <svg viewBox="0 0 320 512" style="fill:var(--bulma-text)"><path class="fa-secondary" opacity=".4" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/><path class="fa-primary" d=""/></svg>
                 </span>
             </button>
         </div>
