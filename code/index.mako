@@ -68,7 +68,7 @@
                 top: var(--yui-top-layer-size);
                 bottom: var(--yui-bottom-layer-size);
                 width: 100%;
-                height: calc(100vh - var(--yui-top-layer-size) - var(--yui-bottom-layer-size));
+                height: calc(100% - var(--yui-top-layer-size) - var(--yui-bottom-layer-size));
             }
             .yui-bottom-layer {
                 position: fixed;

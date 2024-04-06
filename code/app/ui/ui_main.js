@@ -84,6 +84,7 @@
         /*---------------------------------------*
          *      Work area
          *---------------------------------------*/
+        build_work_area(self);
 
         /*---------------------------------------*
          *      Set initial state
@@ -102,7 +103,7 @@
             "#yui-top-layer",   // parent
             "",                 // id
             "",                 // class
-            "border-bottom: 1px solid rgba(0, 0, 0, 0.08);", // style
+            "border-bottom: 1px solid var(--bulma-border-weak);", // style
             [
             {
                 description: "App Menu",
@@ -177,9 +178,24 @@
             "#yui-bottom-layer",   // parent
             "",                 // id
             "",                 // class
-            "border-top: 1px solid rgba(0, 0, 0, 0.08);", // style
+            "border-top: 1px solid var(--bulma-border-weak);", // style
             [
         ]);
+    }
+
+    /************************************************************
+     *
+     ************************************************************/
+    function build_work_area(self) {
+        let html = `\
+            <div id="yui-main-content" class="yui-main-content" 
+                ><div id="yui-menu-column" class="yui-menu-column"
+                ></div
+                ><div id="yui-content-column" class="yui-content-column"
+                ></div
+            ></div>
+        `;
+        let $item = jQuery(html).appendTo(document.querySelector('#yui-content-layer'));
     }
 
     /************************************************************
@@ -206,13 +222,9 @@
     }
 
 
-
-
-                    /***************************
-                     *      Actions
-                     ***************************/
-
-
+    /***************************
+     *      Actions
+     ***************************/
 
 
     /************************************************
@@ -221,8 +233,7 @@
      *      password:
      *  }
      ************************************************/
-    function ac_do_login(self, event, kw, src)
-    {
+    function ac_do_login(self, event, kw, src) {
         let __login__ = self.yuno.gobj_find_service("__login__", true);
         __login__.gobj_send_event("EV_DO_LOGIN", kw, self);
 

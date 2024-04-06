@@ -12,7 +12,7 @@
         "jsoneditor/themes/jse-theme-dark.css",
         "yuneta-icon-font/yuneta-icon-font.css",
         "app/ui/ui_toolbar.css",
-        "app/yuneta_gui.css"
+        "app/ui/ui_main.css"
     ],
     "module_js": [
     ],
