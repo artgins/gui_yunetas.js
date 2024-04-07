@@ -186,7 +186,8 @@
     /************************************************************
      *
      ************************************************************/
-    function build_work_area(self) {
+    function build_work_area(self)
+    {
         let html = `
             <div id="yui-main-content" class="yui-main-content" 
                 ><div id="yui-menu-column" class="yui-menu-column"
@@ -232,6 +233,94 @@
                         </span>
                     </a>
                 </li>
+                <li>
+                    <a>
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-cog"></i></span
+                            ><span class="is-hidden-mobile">Settings</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-cog"></i></span
+                            ><span class="is-hidden-mobile">Settings</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-cog"></i></span
+                            ><span class="is-hidden-mobile">Settings</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-cog"></i></span
+                            ><span class="is-hidden-mobile">Settings</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-cog"></i></span
+                            ><span class="is-hidden-mobile">Settings</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-cog"></i></span
+                            ><span class="is-hidden-mobile">Settings</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-cog"></i></span
+                            ><span class="is-hidden-mobile">Settings</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-cog"></i></span
+                            ><span class="is-hidden-mobile">Settings</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-cog"></i></span
+                            ><span class="is-hidden-mobile">Settings</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-cog"></i></span
+                            ><span class="is-hidden-mobile">Settings</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-cog"></i></span
+                            ><span class="is-hidden-mobile">Settings</span>
+                        </span>
+                    </a>
+                </li>
             </ul>
             </aside>
         `;
@@ -260,19 +349,44 @@
             // Set the menu column width to the maxWidth plus some padding
             const menuColumn = document.querySelector('#yui-menu-column');
             if (menuColumn) {
-                menuColumn.style.width = `${maxWidth + 30}px`; // Add 30px padding
+                menuColumn.style.width = `${maxWidth + get_menu_padding()}px`;
             }
         }
 
-        // window.addEventListener('resize', debounce(adjustMenuWidth, 100));
-        window.addEventListener('resize', adjustMenuWidth);
+        window.addEventListener('resize', debounce(adjustMenuWidth, 10));
+        // window.addEventListener('resize', adjustMenuWidth);
         adjustMenuWidth();
+    }
+
+    /************************************************************
+     *
+     ************************************************************/
+    function get_menu_padding()
+    {
+        let padding = 0;
+        const menu_column = document.querySelector('#yui-menu-column');
+
+        // Calculate the scrollbar width
+        padding += menu_column.offsetWidth - menu_column.clientWidth;
+
+        // Get the computed styles for the element
+        const menu_item = document.querySelector('#yui-menu-column li a');
+        const styles = window.getComputedStyle(menu_item);
+
+        // Access the padding values
+        padding += parseInt(styles.paddingRight);
+        padding += parseInt(styles.paddingLeft);
+
+        padding += 4; // extra
+
+        return padding;
     }
 
     /************************************************************
      *   Set theme
      ************************************************************/
-    function set_theme(theme) {
+    function set_theme(theme)
+    {
         let $svg = jQuery("#theme-change svg");
         $svg.css('display', 'none');
 
