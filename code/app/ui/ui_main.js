@@ -99,69 +99,186 @@
      ************************************************************/
     function build_top_toolbar(self)
     {
-        let $html = jQuery(`
-            <nav class="navbar" role="navigation" aria-label="main navigation">
-                <div class="navbar-brand">
-                    <a class="navbar-item" href="https://bulma.io">
-                    </a>
-                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
-                </div>
-                <div id="navbarBasicExample" class="navbar-menu">
-                    <div class="navbar-start">
-                        <a class="navbar-item">
-                            Home
-                        </a>
-                        <a class="navbar-item">
-                            Documentation
-                        </a>
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                                More
-                            </a>
-                            <div class="navbar-dropdown">
-                                <a class="navbar-item">
-                                    About
-                                </a>
-                                <a class="navbar-item is-selected">
-                                    Jobs
-                                </a>
-                                <a class="navbar-item">
-                                    Contact
-                                </a>
-                                <hr class="navbar-divider">
-                                <a class="navbar-item">
-                                    Report an issue
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="navbar-end">
-                        <div class="navbar-item">
-                            <div class="buttons">
-                                <a class="button is-primary">
-                                    <strong>Sign up</strong>
-                                </a>
-                                <a class="button is-light">
-                                    Log in
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        `);
-        $html.append($html);
+
+
+    const builder = createHtmlBuilder();
+
+    // Opening <nav> with attributes
+    builder.openElement('nav', {class: "navbar", role: "navigation", "aria-label": "main navigation"});
+
+      // NAVBAR BRAND
+      builder.openElement('div', {class: "navbar-brand"});
+
+        // Navbar items (logo and burger icon)
+        builder.openElement('a', {class: "navbar-item", href: "https://bulma.io"});
+        builder.closeElement(); // Close <a>
+
+        // Navbar burger icon
+        builder.openElement('a', {role: "button", class: "navbar-burger", "aria-label": "menu", "aria-expanded": "false", "data-target": "navbarBasicExample"});
+          // Spans for burger icon
+          for (let i = 0; i < 4; i++) {
+            builder.openElement('span', {"aria-hidden": "true"});
+            builder.closeElement(); // Close <span>
+          }
+        builder.closeElement(); // Close <a>
+
+      builder.closeElement(); // Close <div class="navbar-brand">
+
+      // NAVBAR MENU
+      builder.openElement('div', {id: "navbarBasicExample", class: "navbar-menu"});
+
+        // Navbar start
+        builder.openElement('div', {class: "navbar-start"});
+
+          // Home link
+          builder.openElement('a', {class: "navbar-item"});
+          builder.insertText('Home');
+          builder.closeElement(); // Close <a>
+
+          // Documentation link
+          builder.openElement('a', {class: "navbar-item"});
+          builder.insertText('Documentation');
+          builder.closeElement(); // Close <a>
+
+          // More dropdown
+          builder.openElement('div', {class: "navbar-item has-dropdown is-hoverable"});
+
+            // More link
+            builder.openElement('a', {class: "navbar-link"});
+            builder.insertText('More');
+            builder.closeElement(); // Close <a>
+
+            // Dropdown menu
+            builder.openElement('div', {class: "navbar-dropdown"});
+
+              // About link
+              builder.openElement('a', {class: "navbar-item"});
+              builder.insertText('About');
+              builder.closeElement(); // Close <a>
+
+              // Jobs link
+              builder.openElement('a', {class: "navbar-item is-selected"});
+              builder.insertText('Jobs');
+              builder.closeElement(); // Close <a>
+
+              // Contact link
+              builder.openElement('a', {class: "navbar-item"});
+              builder.insertText('Contact');
+              builder.closeElement(); // Close <a>
+
+              // Divider
+              builder.openElement('hr', {class: "navbar-divider"});
+              builder.closeElement(); // Close <hr>
+
+              // Report an issue link
+              builder.openElement('a', {class: "navbar-item"});
+              builder.insertText('Report an issue');
+              builder.closeElement(); // Close <a>
+
+            builder.closeElement(); // Close <div class="navbar-dropdown">
+          builder.closeElement(); // Close <div class="navbar-item has-dropdown is-hoverable">
+        builder.closeElement(); // Close <div class="navbar-start">
+
+        // Navbar end
+        builder.openElement('div', {class: "navbar-end"});
+
+          // Signup and login buttons
+          builder.openElement('div', {class: "navbar-item"});
+            builder.openElement('div', {class: "buttons"});
+
+              // Sign up button
+              builder.openElement('a', {class: "button is-primary"});
+              builder.insertText('<strong>Sign up</strong>');
+              builder.closeElement(); // Close <a>
+
+              // Log in button
+              builder.openElement('a', {class: "button is-light"});
+              builder.insertText('Log in');
+              builder.closeElement(); // Close <a>
+
+            builder.closeElement(); // Close <div class="buttons">
+          builder.closeElement(); // Close <div class="navbar-item">
+        builder.closeElement(); // Close <div class="navbar-end">
+
+      builder.closeElement(); // Close <div class="navbar-menu">
+    builder.closeElement(); // Close <nav>
+
+    // Retrieving the HTML content and cleaning the builder.
+    let htmlOutput = '';
+    try {
+        htmlOutput = builder.getHtmlAndClean();
+        console.log(htmlOutput);
+    } catch (error) {
+        console.error(error.message);
+    }
+
+    let $html = jQuery(htmlOutput);
+    $html.appendTo(document.querySelector('body'));
+    return;
+
+//         let $html = jQuery(
+// `
+// <nav class="navbar" role="navigation" aria-label="main navigation">
+//     <div class="navbar-brand">
+//         <a class="navbar-item" href="https://bulma.io">
+//         </a>
+//         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+//             <span aria-hidden="true"></span>
+//             <span aria-hidden="true"></span>
+//             <span aria-hidden="true"></span>
+//             <span aria-hidden="true"></span>
+//         </a>
+//     </div>
+//     <div id="navbarBasicExample" class="navbar-menu">
+//         <div class="navbar-start">
+//             <a class="navbar-item">
+//                 Home
+//             </a>
+//             <a class="navbar-item">
+//                 Documentation
+//             </a>
+//             <div class="navbar-item has-dropdown is-hoverable">
+//                 <a class="navbar-link">
+//                     More
+//                 </a>
+//                 <div class="navbar-dropdown">
+//                     <a class="navbar-item">
+//                         About
+//                     </a>
+//                     <a class="navbar-item is-selected">
+//                         Jobs
+//                     </a>
+//                     <a class="navbar-item">
+//                         Contact
+//                     </a>
+//                     <hr class="navbar-divider">
+//                     <a class="navbar-item">
+//                         Report an issue
+//                     </a>
+//                 </div>
+//             </div>
+//         </div>
+//         <div class="navbar-end">
+//             <div class="navbar-item">
+//                 <div class="buttons">
+//                     <a class="button is-primary">
+//                         <strong>Sign up</strong>
+//                     </a>
+//                     <a class="button is-light">
+//                         Log in
+//                     </a>
+//                 </div>
+//             </div>
+//         </div>
+//     </div>
+// </nav>
+// `
+//         );
+//         $html.append($html);
 
 
 
 
-        $html.appendTo(document.querySelector('body'));
-        return;
 
         let image_file = sprintf("%s/static/app/images/app-logo.png",
             get_location_path_root() // get dirName of window.location.pathname
