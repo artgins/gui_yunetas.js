@@ -78,25 +78,20 @@
         build_top_toolbar(self);
 
         /*---------------------------------------*
-         *      Bottom toolbar
-         *---------------------------------------*/
-        build_bottom_toolbar(self);
-
-        /*---------------------------------------*
          *      Work area
          *---------------------------------------*/
-        build_work_area(self);
+        // build_work_area(self);
 
         /*---------------------------------------*
          *      Add menu items
          *---------------------------------------*/
-        add_menu_item("EV_HOME", t("Home"), "fas fa-home", false);
-        add_menu_item("EV_USER", t("Profile"), "fas fa-user", false);
-        add_menu_item("EV_MESSAGE", t("Messages"), "fas fa-envelope", false);
-        add_menu_item("EV_SETTING", t("Settings"), "fas fa-cog", false);
-        add_menu_item("EV_XXX", t("Home"), "fas fa-home", false);
-
-        set_active_menu_item("EV_USER", true);
+        // add_menu_item("EV_HOME", t("Home"), "fas fa-home", false);
+        // add_menu_item("EV_USER", t("Profile"), "fas fa-user", false);
+        // add_menu_item("EV_MESSAGE", t("Messages"), "fas fa-envelope", false);
+        // add_menu_item("EV_SETTING", t("Settings"), "fas fa-cog", false);
+        // add_menu_item("EV_XXX", t("Home"), "fas fa-home", false);
+        //
+        // set_active_menu_item("EV_USER", true);
     }
 
     /************************************************************
@@ -104,6 +99,70 @@
      ************************************************************/
     function build_top_toolbar(self)
     {
+        let $html = jQuery(`
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="https://bulma.io">
+                    </a>
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                <div id="navbarBasicExample" class="navbar-menu">
+                    <div class="navbar-start">
+                        <a class="navbar-item">
+                            Home
+                        </a>
+                        <a class="navbar-item">
+                            Documentation
+                        </a>
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link">
+                                More
+                            </a>
+                            <div class="navbar-dropdown">
+                                <a class="navbar-item">
+                                    About
+                                </a>
+                                <a class="navbar-item is-selected">
+                                    Jobs
+                                </a>
+                                <a class="navbar-item">
+                                    Contact
+                                </a>
+                                <hr class="navbar-divider">
+                                <a class="navbar-item">
+                                    Report an issue
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <a class="button is-primary">
+                                    <strong>Sign up</strong>
+                                </a>
+                                <a class="button is-light">
+                                    Log in
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        `);
+        $html.append($html);
+
+
+
+
+        $html.appendTo(document.querySelector('body'));
+        return;
+
         let image_file = sprintf("%s/static/app/images/app-logo.png",
             get_location_path_root() // get dirName of window.location.pathname
         );
@@ -184,19 +243,6 @@
                 `
                 },
             ]);
-    }
-
-    /************************************************************
-     *
-     ************************************************************/
-    function build_bottom_toolbar(self)
-    {
-        yui_toolbar(
-            "#yui-bottom-layer",   // parent
-            "",                 // id
-            "",                 // class
-            "border-top: 1px solid var(--bulma-border-weak);", // style
-            []);
     }
 
     /************************************************************
@@ -828,9 +874,9 @@
 
 
 
-    /***************************
-     *      Framework Methods
-     ***************************/
+                    /***************************
+                     *      Framework Methods
+                     ***************************/
 
 
 
@@ -838,12 +884,13 @@
     /************************************************************
      *      Framework Method create
      ************************************************************/
-    proto.mt_create = function (kw) {
+    proto.mt_create = function (kw)
+    {
         let self = this;
 
         build_ui(self);
 
-        let current_theme = localStorage.getItem('theme') || 'light';
+        let current_theme = kw_get_local_storage_value("theme", "light", true);
         set_theme(current_theme);
 
         if (self.config.subscriber) {
@@ -856,20 +903,23 @@
      *      In this point, all childs
      *      and subscriptions are already deleted.
      ************************************************************/
-    proto.mt_destroy = function () {
+    proto.mt_destroy = function ()
+    {
     };
 
     /************************************************************
      *      Framework Method start
      ************************************************************/
-    proto.mt_start = function (kw) {
+    proto.mt_start = function (kw)
+    {
         let self = this;
     };
 
     /************************************************************
      *      Framework Method stop
      ************************************************************/
-    proto.mt_stop = function (kw) {
+    proto.mt_stop = function (kw)
+    {
         let self = this;
         self.clear_timeout();
     };
@@ -877,7 +927,8 @@
     /************************************************************
      *      Framework Method stats
      ************************************************************/
-    proto.mt_stats = function (stats, kw, src) {
+    proto.mt_stats = function (stats, kw, src)
+    {
         let self = this;
 
         return {};
@@ -886,7 +937,8 @@
     /************************************************************
      *      Framework Method command
      ************************************************************/
-    proto.mt_command = function (command, kw, src) {
+    proto.mt_command = function (command, kw, src)
+    {
         let self = this;
         switch (command) {
             case "help":
@@ -906,7 +958,8 @@
     /************************************************
      *      Local Method
      ************************************************/
-    proto.get_text_size = function () {
+    proto.get_text_size = function ()
+    {
         let self = this;
         return self.private._text_size;
     };
@@ -914,7 +967,8 @@
     /************************************************
      *      Local Method
      ************************************************/
-    proto.get_icon_size = function () {
+    proto.get_icon_size = function ()
+    {
         let self = this;
         return self.private._icon_size;
     };
@@ -922,7 +976,8 @@
     /************************************************
      *      Local Method
      ************************************************/
-    proto.set_username = function (username) {
+    proto.set_username = function (username)
+    {
         let self = this;
         jQuery.get("#tag_username").html(username);
     };

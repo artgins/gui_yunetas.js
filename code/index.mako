@@ -40,12 +40,13 @@
             % endfor
         % endif
 
-    </head>
-    <body>
         % if 'bottom_js' in assets_env:
             % for url in assets_env['bottom_js']:
-            <script src="${url}"></script>
+        <script src="${url}"></script>
             % endfor
         % endif
+
+    </head>
+    <body>
     </body>
 </html>
