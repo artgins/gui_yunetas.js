@@ -188,19 +188,28 @@
      ************************************************************/
     function build_work_area(self)
     {
+        /*
+         *  Create the two columns model
+         *      yui-main-content
+         *          yui-menu-column
+         *              main-menu
+         *          yui-content-column
+         */
         let html = `
-            <div id="yui-main-content" class="yui-main-content" 
-                ><div id="yui-menu-column" class="yui-menu-column"
-                ></div
-                ><div id="yui-content-column" class="yui-content-column"
-                ></div
-            ></div>
+            <div id="yui-main-content" class="yui-main-content"> 
+                <div id="yui-menu-column" class="yui-menu-column">
+                    <aside id="main-menu" class="menu">
+                        <ul id="main-menu-list" class="menu-list">
+                        </ul>
+                    </aside>
+                </div>
+                <div id="yui-content-column" class="yui-content-column">
+                </div>
+            </div>
         `;
         jQuery(html).appendTo(document.querySelector('#yui-content-layer'));
 
         html = `
-            <aside class="menu">
-            <ul class="menu-list">
                 <li>
                     <a class="is-active">
                         <span class="icon-text">
@@ -233,98 +242,8 @@
                         </span>
                     </a>
                 </li>
-                <li>
-                    <a>
-                        <span class="icon-text">
-                            <span class="icon"><i class="fas fa-cog"></i></span
-                            ><span class="is-hidden-mobile">Settings</span>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon-text">
-                            <span class="icon"><i class="fas fa-cog"></i></span
-                            ><span class="is-hidden-mobile">Settings</span>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon-text">
-                            <span class="icon"><i class="fas fa-cog"></i></span
-                            ><span class="is-hidden-mobile">Settings</span>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon-text">
-                            <span class="icon"><i class="fas fa-cog"></i></span
-                            ><span class="is-hidden-mobile">Settings</span>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon-text">
-                            <span class="icon"><i class="fas fa-cog"></i></span
-                            ><span class="is-hidden-mobile">Settings</span>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon-text">
-                            <span class="icon"><i class="fas fa-cog"></i></span
-                            ><span class="is-hidden-mobile">Settings</span>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon-text">
-                            <span class="icon"><i class="fas fa-cog"></i></span
-                            ><span class="is-hidden-mobile">Settings</span>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon-text">
-                            <span class="icon"><i class="fas fa-cog"></i></span
-                            ><span class="is-hidden-mobile">Settings</span>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon-text">
-                            <span class="icon"><i class="fas fa-cog"></i></span
-                            ><span class="is-hidden-mobile">Settings</span>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon-text">
-                            <span class="icon"><i class="fas fa-cog"></i></span
-                            ><span class="is-hidden-mobile">Settings</span>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon-text">
-                            <span class="icon"><i class="fas fa-cog"></i></span
-                            ><span class="is-hidden-mobile">Settings</span>
-                        </span>
-                    </a>
-                </li>
-            </ul>
-            </aside>
         `;
-        jQuery(html).appendTo(document.querySelector('#yui-menu-column'));
+        jQuery(html).appendTo(document.querySelector('#main-menu-list'));
 
         function adjustMenuWidth() {
             const menuItems = document.querySelectorAll('#yui-menu-column li a span');
