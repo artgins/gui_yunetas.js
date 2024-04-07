@@ -38,6 +38,7 @@ html, body {
 
 .yui-main-content {
     display: flex;
+    position: relative;
     width: 100%;
     height: 100%;
 }
@@ -50,6 +51,7 @@ html, body {
 
 .yui-content-column {
     overflow: auto;
+    position: relative;
     width: 75%;
     height: 100%;
 }

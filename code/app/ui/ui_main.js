@@ -28,17 +28,17 @@
         color_user_login: "#32CD32",            // LimeGreen
         color_user_logout: "#FF4500",           // OrangeRed
 
-        $ui: null,      // w2ui object
-
         //////////////// Private Attributes /////////////////
+        _$user_menu_popup: null,
+
     };
 
 
 
 
-                    /***************************
-                     *      Commands
-                     ***************************/
+    /***************************
+     *      Commands
+     ***************************/
 
 
 
@@ -46,7 +46,8 @@
     /************************************************************
      *
      ************************************************************/
-    function cmd_help(self, cmd, kw, src) {
+    function cmd_help(self, cmd, kw, src)
+    {
         let webix = {
             "result": 0,
             "comment": "",
@@ -59,9 +60,9 @@
 
 
 
-                    /***************************
-                     *      Local Methods
-                     ***************************/
+    /***************************
+     *      Local Methods
+     ***************************/
 
 
 
@@ -112,41 +113,41 @@
             "",                 // class
             "border-bottom: 1px solid var(--bulma-border-weak);", // style
             [
-            {
-                description: "App Menu",
-                position: "left",
-                callback: function(this_item) {
-                    self.gobj_send_event("EV_APP_MENU", {}, self);
-                },
-                html: `
+                {
+                    description: "App Menu",
+                    position: "left",
+                    callback: function (this_item) {
+                        self.gobj_send_event("EV_APP_MENU", {}, self);
+                    },
+                    html: `
                     <div class="">
                         <button class="button without-border">
                             <svg id="icon-state-yuneta" width="1.5em" height="1.5em" viewBox="0 0 448 512"><path fill="${self.config.color_yuneta_disconnected}" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
                         </button>
                     </div>
                 `
-            },
-            {
-                description: "Center App Logo",
-                position: "center",
-                callback: function(this_item) {
-                    self.gobj_send_event("EV_HOME", {}, self);
                 },
-                html: `
+                {
+                    description: "Center App Logo",
+                    position: "center",
+                    callback: function (this_item) {
+                        self.gobj_send_event("EV_HOME", {}, self);
+                    },
+                    html: `
                     <div class="buttons">
                         <figure class="" style="padding-top: 4px; width: 80px; height: 38px;">
                             <img src="${image_file}" alt="App logo"/>
                         </figure>
                     </div>
                 `
-            },
-            {
-                description: "Change theme",
-                position: "right",
-                callback: function(this_item) {
-                    self.gobj_send_event("EV_CHANGE_THEME", {}, self);
                 },
-                html: `
+                {
+                    description: "Change theme",
+                    position: "right",
+                    callback: function (this_item) {
+                        self.gobj_send_event("EV_CHANGE_THEME", {}, self);
+                    },
+                    html: `
                     <div class="">
                         <button id="theme-change" class="button without-border">
                             <svg class="theme-system" width="1.5em" height="1.5em" style="display:none;" fill="#3C9D72" viewBox="0 0 512 512"><path d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/></svg>
@@ -155,25 +156,34 @@
                         </button>
                     </div>
                 `
-            },
-            {
-                description: "Username, Account menu",
-                position: "right",
-                callback: function() {
-                    self.gobj_send_event("EV_USER_MENU", {}, self);
                 },
-                html: `
-                    <div class="">
-                        <span id="tag_username" class="tag">pepe@xxx.com</span>
-                        <button class="button without-border">
-                            <span style="width:1.5em;height:1.5em">
-                                <svg viewBox="0 0 448 512" width="1.5em" height="1.5em" ><path fill="${self.config.color_user_logout}" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
-                            </span>
-                        </button>
-                    </div>
+                {
+                    description: "Username, Account menu",
+                    position: "right",
+                    // callback: function () {
+                    //     self.gobj_send_event("EV_USER_MENU", {}, self);
+                    // },
+                    html: `
+                    <div id="dropdown-user-menu" class="dropdown is-right is-active" style="">
+                        <div class="dropdown-trigger">
+                            <span id="tag_username" class="tag">pepe@xxx.com</span
+                            ><button class="button without-border" aria-haspopup="true" aria-controls="dropdown-user-menu-items">
+                                <span style="width:1.5em;height:1.5em">
+                                    <svg viewBox="0 0 448 512" width="1.5em" height="1.5em" ><path fill="${self.config.color_user_logout}" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-user-menu-items" role="menu">
+                            <div class="dropdown-content">
+                                  <a href="#" class="dropdown-item"> Dropdown item </a>
+                                  <hr class="dropdown-divider" />
+                                  <a href="#" class="dropdown-item"> With a divider </a>
+                            </div>
+                        </div>
+                </div>
                 `
-            },
-        ]);
+                },
+            ]);
     }
 
     /************************************************************
@@ -186,8 +196,7 @@
             "",                 // id
             "",                 // class
             "border-top: 1px solid var(--bulma-border-weak);", // style
-            [
-        ]);
+            []);
     }
 
     /************************************************************
@@ -231,9 +240,9 @@
     {
         let html = `
             <li>
-                <a id="${id}" class="${active?'is-active':''}">
+                <a id="${id}" class="${active ? 'is-active' : ''}">
                     <span class="icon-text">
-                        <span class="icon"><i class="${icon?icon:''}"></i></span
+                        <span class="icon"><i class="${icon ? icon : ''}"></i></span
                         ><span class="is-hidden-mobile">${text}</span>
                     </span>
                 </a>
@@ -250,8 +259,8 @@
     function set_active_menu_item(id, active)
     {
         let item = document.querySelector(`#${id}`);
-        if(item) {
-            if(active) {
+        if (item) {
+            if (active) {
                 item.classList.add('is-active');
             } else {
                 item.classList.remove('is-active');
@@ -302,7 +311,7 @@
 
         // Get the computed styles for the element
         const menu_item = document.querySelector('#yui-menu-column li a');
-        if(menu_item) {
+        if (menu_item) {
             const styles = window.getComputedStyle(menu_item);
 
             // Access the padding values
@@ -340,104 +349,134 @@
     }
 
     /************************************************************
-     *   Select language
+     *   User Menu
      ************************************************************/
-    function select_language(self)
+    function build_user_menu(self)
     {
-        var nombre_locales = [];
-        var locales = __yuno__.__default_service__.gobj_read_attr("locales");
-        for (var key in locales) {
-            var obj = {
-                id: key,
-                value: locales[key].nombre
-            };
-            nombre_locales.push(obj);
-        }
-
-        var menu_language = {
-            view: "form",
-            id: "form_language",
-            rows: [
-                {
-                    view: "radio",
-                    name: "language",
-                    options: nombre_locales,
-                    align: "center",
-                    vertical: true
-                },
-                {
-                    margin: 10,
-                    cols: [
-                        {
-                            view: "button",
-                            label: t("cancel"),
-                            css:"webix_tertiary",
-                            width:100,
-                            click: function() {
-                                this.getTopParentView().hide();
-                            }
-                        },
-                        {
-                            view: "button",
-                            label: t("save"),
-                            width: 100,
-                            css: "webix_primary",
-                            click: function() {
-                                this.getTopParentView().hide();
-                                var lng = this.getFormView().elements.language.getValue();
-                                if(lng != kw_get_local_storage_value("locale", null, 0)) {
-                                    i18next.changeLanguage(
-                                        lng,
-                                        function(err, t) {
-                                            if (err) {
-                                                trace_msg('changeLanguage failed: ' + err);
-                                                return;
-                                            }
-                                            var old_lng = kw_set_local_storage_value(
-                                                "locale",
-                                                lng
-                                            );
-                                            if(lng != old_lng) {
-                                                window.location.reload(true);
-                                            }
-                                        }
-                                    );
-                                }
-                            }
-                        }
-                    ]
-                }
-            ]
-        };
-
-        webix.ui({
-            id: "select_language",
-            view: "window",
-            head: t("language"),
-            position: "center",
-            close: false,
-            modal: true,
-            body: menu_language,
-            on: {
-                "onShow": function(e) {
-                    $$("form_language").setValues(
-                        {
-                            language: kw_get_local_storage_value("locale", null, 0)
-                        }
-                    );
-                    $$("form_language").focus();
-                }
-            }
-        }).hide();
-
+        let html = `
+            <div class="dropdown is-active">
+              <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                  <span>Dropdown button</span>
+                  <span class="icon is-small">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                  <a href="#" class="dropdown-item"> Dropdown item </a>
+                  <a class="dropdown-item"> Other dropdown item </a>
+                  <a href="#" class="dropdown-item is-active"> Active dropdown item </a>
+                  <a href="#" class="dropdown-item"> Other dropdown item </a>
+                  <hr class="dropdown-divider" />
+                  <a href="#" class="dropdown-item"> With a divider </a>
+                </div>
+              </div>
+            </div>
+        `;
+        self.private._$user_menu_popup = jQuery(html);
     }
 
+    /************************************************************
+     *   Select language
+     ************************************************************/
+    // function select_language(self)
+    // {
+    //     var nombre_locales = [];
+    //     var locales = __yuno__.__default_service__.gobj_read_attr("locales");
+    //     for (var key in locales) {
+    //         var obj = {
+    //             id: key,
+    //             value: locales[key].nombre
+    //         };
+    //         nombre_locales.push(obj);
+    //     }
+    //
+    //     var menu_language = {
+    //         view: "form",
+    //         id: "form_language",
+    //         rows: [
+    //             {
+    //                 view: "radio",
+    //                 name: "language",
+    //                 options: nombre_locales,
+    //                 align: "center",
+    //                 vertical: true
+    //             },
+    //             {
+    //                 margin: 10,
+    //                 cols: [
+    //                     {
+    //                         view: "button",
+    //                         label: t("cancel"),
+    //                         css:"webix_tertiary",
+    //                         width:100,
+    //                         click: function() {
+    //                             this.getTopParentView().hide();
+    //                         }
+    //                     },
+    //                     {
+    //                         view: "button",
+    //                         label: t("save"),
+    //                         width: 100,
+    //                         css: "webix_primary",
+    //                         click: function() {
+    //                             this.getTopParentView().hide();
+    //                             var lng = this.getFormView().elements.language.getValue();
+    //                             if(lng != kw_get_local_storage_value("locale", null, 0)) {
+    //                                 i18next.changeLanguage(
+    //                                     lng,
+    //                                     function(err, t) {
+    //                                         if (err) {
+    //                                             trace_msg('changeLanguage failed: ' + err);
+    //                                             return;
+    //                                         }
+    //                                         var old_lng = kw_set_local_storage_value(
+    //                                             "locale",
+    //                                             lng
+    //                                         );
+    //                                         if(lng != old_lng) {
+    //                                             window.location.reload(true);
+    //                                         }
+    //                                     }
+    //                                 );
+    //                             }
+    //                         }
+    //                     }
+    //                 ]
+    //             }
+    //         ]
+    //     };
+    //
+    //     webix.ui({
+    //         id: "select_language",
+    //         view: "window",
+    //         head: t("language"),
+    //         position: "center",
+    //         close: false,
+    //         modal: true,
+    //         body: menu_language,
+    //         on: {
+    //             "onShow": function(e) {
+    //                 $$("form_language").setValues(
+    //                     {
+    //                         language: kw_get_local_storage_value("locale", null, 0)
+    //                     }
+    //                 );
+    //                 $$("form_language").focus();
+    //             }
+    //         }
+    //     }).hide();
+    //
+    // }
 
 
 
-                    /***************************
-                     *      Actions
-                     ***************************/
+
+    /***************************
+     *      Actions
+     ***************************/
 
 
 
@@ -510,8 +549,8 @@
         display_error_message(
             t(error),
             "Error",
-            function() {
-                if(empty_string(self.config.username)) {
+            function () {
+                if (empty_string(self.config.username)) {
                     // show_login_form(self);
                 }
             }
@@ -540,7 +579,7 @@
      *
      ************************************************/
     function ac_select_language(self, event, kw, src)
-     {
+    {
         // src.gobj_send_event("EV_HIDE", {}, self); // TODO
         return 0;
     }
@@ -559,7 +598,7 @@
             y: element.absolutePosition().y + element.height(),
         };
 
-        if(self.private._connex_info_window) {
+        if (self.private._connex_info_window) {
             self.private._connex_info_window.destroy();
             self.private._connex_info_window = null;
         } else {
@@ -571,16 +610,18 @@
                 y: 2,
                 width: 400,
                 height: 350,
-                onResized(ev) {
-                    if(editor && editor.setSize) {
+                onResized(ev)
+                {
+                    if (editor && editor.setSize) {
                         editor.setSize(
                             ev.detail.body_rect.width,
                             ev.detail.body_rect.height
                         );
                     }
                 },
-                onClose(ev) {
-                    if(editor && editor.destroy) {
+                onClose(ev)
+                {
+                    if (editor && editor.destroy) {
                         editor.destroy();
                     }
                     self.private._connex_info_window = null;
@@ -588,7 +629,7 @@
             });
             let target = self.private._connex_info_window.get_container();
 
-            if(target.length > 0) {
+            if (target.length > 0) {
                 let props = {
                     content: {
                         json: self.private._connex_info
@@ -618,7 +659,7 @@
             }
         }
 
-        if(self.private._gobj_app_menu_popup) {
+        if (self.private._gobj_app_menu_popup) {
             self.private._gobj_app_menu_popup.gobj_send_event("EV_TOGGLE", position, self);
         }
 
@@ -641,7 +682,7 @@
         let current_theme = kw_get_local_storage_value("theme", "light", true);
 
         let new_theme;
-        switch(current_theme) {
+        switch (current_theme) {
             case 'dark':
                 new_theme = 'system';
                 break;
@@ -665,7 +706,7 @@
      ************************************************/
     function ac_user_menu(self, event, kw, src)
     {
-        if(empty_string(self.config.username)) {
+        if (empty_string(self.config.username)) {
             // show_login_form(self);
         } else {
             let element = kw.element; // button clicked
@@ -674,7 +715,7 @@
                 x: element.absolutePosition().x + element.width(),
                 y: element.absolutePosition().y + element.height(),
             };
-            if(self.private._gobj_user_menu_popup) {
+            if (self.private._gobj_user_menu_popup) {
                 self.private._gobj_user_menu_popup.gobj_send_event("EV_TOGGLE", position, self);
             }
         }
@@ -711,7 +752,7 @@
         // self.gobj_send_event("EV_USER_MENU", {element: self.config._ka_user_menu_button}, self);
         // self.set_timeout(100);
 
-        if(empty_string(self.config.username)) {
+        if (empty_string(self.config.username)) {
             // show_login_form(self);
         }
         return 0;
@@ -720,9 +761,9 @@
 
 
 
-                    /***************************
-                     *      GClass/Machine
-                     ***************************/
+    /***************************
+     *      GClass/Machine
+     ***************************/
 
 
 
@@ -743,34 +784,34 @@
             "EV_INFO_CONNECTED",
             "EV_INFO_DISCONNECTED",
             "EV_TIMEOUT"
-       ],
+        ],
         "state_list": [
             "ST_IDLE"
         ],
         "machine": {
             "ST_IDLE":
-            [
-                ["EV_LOGIN_ACCEPTED",       ac_login_accepted,      undefined],
-                ["EV_LOGIN_DENIED",         ac_login_denied,        undefined],
-                ["EV_LOGIN_REFRESHED",      ac_login_refreshed,     undefined],
-                ["EV_LOGOUT_DONE",          ac_logout_done,         undefined],
-                ["EV_DO_LOGIN",             ac_do_login,            undefined],
-                ["EV_DO_LOGOUT",            ac_do_logout,           undefined],
-                ["EV_SELECT_LANGUAGE",      ac_select_language,     undefined],
-                ["EV_APP_MENU",             ac_app_menu,            undefined],
-                ["EV_HOME",                 ac_home,                undefined],
-                ["EV_CHANGE_THEME",         ac_change_theme,        undefined],
-                ["EV_USER_MENU",            ac_user_menu,           undefined],
-                ["EV_INFO_CONNECTED",       ac_info_connected,      undefined],
-                ["EV_INFO_DISCONNECTED",    ac_info_disconnected,   undefined],
-                ["EV_TIMEOUT",              ac_timeout,             undefined]
-            ]
+                [
+                    ["EV_LOGIN_ACCEPTED", ac_login_accepted, undefined],
+                    ["EV_LOGIN_DENIED", ac_login_denied, undefined],
+                    ["EV_LOGIN_REFRESHED", ac_login_refreshed, undefined],
+                    ["EV_LOGOUT_DONE", ac_logout_done, undefined],
+                    ["EV_DO_LOGIN", ac_do_login, undefined],
+                    ["EV_DO_LOGOUT", ac_do_logout, undefined],
+                    ["EV_SELECT_LANGUAGE", ac_select_language, undefined],
+                    ["EV_APP_MENU", ac_app_menu, undefined],
+                    ["EV_HOME", ac_home, undefined],
+                    ["EV_CHANGE_THEME", ac_change_theme, undefined],
+                    ["EV_USER_MENU", ac_user_menu, undefined],
+                    ["EV_INFO_CONNECTED", ac_info_connected, undefined],
+                    ["EV_INFO_DISCONNECTED", ac_info_disconnected, undefined],
+                    ["EV_TIMEOUT", ac_timeout, undefined]
+                ]
         }
     };
 
     let Ui_main = GObj.__makeSubclass__();
     let proto = Ui_main.prototype; // Easy access to the prototype
-    proto.__init__= function(name, kw) {
+    proto.__init__ = function (name, kw) {
         GObj.prototype.__init__.call(
             this,
             FSM,
@@ -787,9 +828,9 @@
 
 
 
-                    /***************************
-                     *      Framework Methods
-                     ***************************/
+    /***************************
+     *      Framework Methods
+     ***************************/
 
 
 
@@ -797,8 +838,7 @@
     /************************************************************
      *      Framework Method create
      ************************************************************/
-    proto.mt_create = function(kw)
-    {
+    proto.mt_create = function (kw) {
         let self = this;
 
         build_ui(self);
@@ -806,7 +846,7 @@
         let current_theme = localStorage.getItem('theme') || 'light';
         set_theme(current_theme);
 
-        if(self.config.subscriber) {
+        if (self.config.subscriber) {
             self.gobj_subscribe_event(null, {}, self.config.subscriber);
         }
     };
@@ -816,23 +856,20 @@
      *      In this point, all childs
      *      and subscriptions are already deleted.
      ************************************************************/
-    proto.mt_destroy = function()
-    {
+    proto.mt_destroy = function () {
     };
 
     /************************************************************
      *      Framework Method start
      ************************************************************/
-    proto.mt_start = function(kw)
-    {
+    proto.mt_start = function (kw) {
         let self = this;
     };
 
     /************************************************************
      *      Framework Method stop
      ************************************************************/
-    proto.mt_stop = function(kw)
-    {
+    proto.mt_stop = function (kw) {
         let self = this;
         self.clear_timeout();
     };
@@ -840,8 +877,7 @@
     /************************************************************
      *      Framework Method stats
      ************************************************************/
-    proto.mt_stats = function(stats, kw, src)
-    {
+    proto.mt_stats = function (stats, kw, src) {
         let self = this;
 
         return {};
@@ -850,10 +886,9 @@
     /************************************************************
      *      Framework Method command
      ************************************************************/
-    proto.mt_command = function(command, kw, src)
-    {
+    proto.mt_command = function (command, kw, src) {
         let self = this;
-        switch(command) {
+        switch (command) {
             case "help":
                 return cmd_help(self, command, kw, src);
             default:
@@ -871,8 +906,7 @@
     /************************************************
      *      Local Method
      ************************************************/
-    proto.get_text_size = function()
-    {
+    proto.get_text_size = function () {
         let self = this;
         return self.private._text_size;
     };
@@ -880,8 +914,7 @@
     /************************************************
      *      Local Method
      ************************************************/
-    proto.get_icon_size = function()
-    {
+    proto.get_icon_size = function () {
         let self = this;
         return self.private._icon_size;
     };
@@ -889,8 +922,7 @@
     /************************************************
      *      Local Method
      ************************************************/
-    proto.set_username = function(username)
-    {
+    proto.set_username = function (username) {
         let self = this;
         jQuery.get("#tag_username").html(username);
     };

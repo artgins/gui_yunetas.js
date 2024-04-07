@@ -192,8 +192,8 @@
             } catch(error) {
             }
 
-            ev.preventDefault();
-            return false;
+            // ev.preventDefault();
+            // return false;
         };
 
         _wrapper.addEventListener("focus", function (e) {
@@ -226,8 +226,8 @@
                     self.gobj_send_event("EV_FORGOT_PASSWORD", kw_login, self);
                 } catch(error) {
                 }
-                ev.preventDefault();
-                return false;
+                // ev.preventDefault();
+                // return false;
             };
         }
         if(register_field) {
@@ -244,8 +244,8 @@
                     self.gobj_send_event("EV_REGISTER_USER", kw_login, self);
                 } catch(error) {
                 }
-                ev.preventDefault();
-                return false;
+                // ev.preventDefault();
+                // return false;
             };
         }
     }

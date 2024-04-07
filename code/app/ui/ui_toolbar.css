@@ -1,7 +1,7 @@
 .yui-horizontal-toolbar {
     display: flex;
     align-items: center;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 .yui-horizontal-toolbar-container {
@@ -9,7 +9,7 @@
     overflow-x: auto;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
-    position: relative; /* Needed for absolute positioning of scroll buttons */
+    /*position: relative; !* Needed for absolute positioning of scroll buttons *!*/
     flex-grow: 1;
     margin: 0 1em; /* Reserve space for buttons */
     justify-content: space-between;
@@ -23,6 +23,7 @@
 
 .yui-horizontal-toolbar-section {
     display: flex;
+    position: relative;
     flex-shrink: 0; /* Prevents resizing */
     white-space: nowrap;
     margin: 0 5px; /* Space between sections */
