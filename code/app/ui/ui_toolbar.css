@@ -9,7 +9,6 @@
     overflow-x: auto;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
-    /*position: relative; !* Needed for absolute positioning of scroll buttons *!*/
     flex-grow: 1;
     margin: 0 1em; /* Reserve space for buttons */
     justify-content: space-between;

@@ -59,8 +59,8 @@ function yui_toolbar(parent, id="", clase="", style="", items=[])
         if($item && callback) {
             $item.data("callback", callback);
             $item.on(browser_event, function(evt) {
-                if (evt.stopPropagation) {evt.stopPropagation();} else {evt.cancelBubble = true;}
-                if (evt.preventDefault) {evt.preventDefault();} else {return false;}
+                // if (evt.stopPropagation) {evt.stopPropagation();} else {evt.cancelBubble = true;}
+                // if (evt.preventDefault) {evt.preventDefault();} else {return false;}
                 callback(items[i]);
             });
         }
