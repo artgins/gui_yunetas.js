@@ -87,8 +87,13 @@
         build_work_area(self);
 
         /*---------------------------------------*
-         *      Set initial state
+         *      Add menu items
          *---------------------------------------*/
+        add_menu_item("EV_HOME", "Home", "fas fa-home", true);
+        add_menu_item("EV_HOME", "Profile", "fas fa-user", false);
+        add_menu_item("EV_HOME", "Messages", "fas fa-envelope", false);
+        add_menu_item("EV_HOME", "Settings", "fas fa-cog", false);
+        add_menu_item("EV_HOME", "Home", "fas fa-home", false);
     }
 
     /************************************************************
@@ -193,6 +198,7 @@
          *      yui-main-content
          *          yui-menu-column
          *              main-menu
+         *                  main-menu-list
          *          yui-content-column
          */
         let html = `
@@ -209,72 +215,63 @@
         `;
         jQuery(html).appendTo(document.querySelector('#yui-content-layer'));
 
-        html = `
-                <li>
-                    <a class="is-active">
-                        <span class="icon-text">
-                            <span class="icon"><i class="fas fa-home"></i></span
-                            ><span class="is-hidden-mobile">Messages</span>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon-text">
-                            <span class="icon"><i class="fas fa-user"></i></span
-                            ><span class="is-hidden-mobile">Profile</span>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon-text">
-                            <span class="icon"><i class="fas fa-envelope"></i></span
-                            ><span class="is-hidden-mobile">Messages</span>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon-text">
-                            <span class="icon"><i class="fas fa-cog"></i></span
-                            ><span class="is-hidden-mobile">Settings</span>
-                        </span>
-                    </a>
-                </li>
+        window.addEventListener('resize', debounce(adjustMenuWidth, 10));
+        // window.addEventListener('resize', adjustMenuWidth);
+
+        window.dispatchEvent(new Event('resize'));
+        //adjustMenuWidth(); Not ok in chrome refresh
+    }
+
+    /************************************************************
+     *
+     ************************************************************/
+    function add_menu_item(id, text, icon, active)
+    {
+        let html = `
+            <li>
+                <a id="${id}" class="${active?'is-active':''}">
+                    <span class="icon-text">
+                        <span class="icon"><i class="${icon?icon:''}"></i></span
+                        ><span class="is-hidden-mobile">${text}</span>
+                    </span>
+                </a>
+            </li>
         `;
         jQuery(html).appendTo(document.querySelector('#main-menu-list'));
 
-        function adjustMenuWidth() {
-            const menuItems = document.querySelectorAll('#yui-menu-column li a span');
-            let maxWidth = 0;
+        adjustMenuWidth();
+    }
 
-            // Iterate over menu items to find the maximum width
-            menuItems.forEach(item => {
-                //const width = item.getBoundingClientRect().width;
-                //const width = item.offsetWidth;
-                let width = 0;
-                const lineItems = item.querySelectorAll('span');
-                lineItems.forEach(item2 => {
-                    width += item2.getBoundingClientRect().width;
-                });
 
-                if (width > maxWidth) {
-                    maxWidth = width; // Update maxWidth if current item's width is larger
-                }
-                trace_msg(`maxWidth: ${maxWidth}, width: ${width}x`);
+    /************************************************************
+     *
+     ************************************************************/
+    function adjustMenuWidth()
+    {
+        const menuItems = document.querySelectorAll('#yui-menu-column li a span');
+        let maxWidth = 0;
+
+        // Iterate over menu items to find the maximum width
+        menuItems.forEach(item => {
+            //const width = item.getBoundingClientRect().width;
+            //const width = item.offsetWidth;
+            let width = 0;
+            const lineItems = item.querySelectorAll('span');
+            lineItems.forEach(item2 => {
+                width += item2.getBoundingClientRect().width;
             });
 
-            // Set the menu column width to the maxWidth plus some padding
-            const menuColumn = document.querySelector('#yui-menu-column');
-            if (menuColumn) {
-                menuColumn.style.width = `${maxWidth + get_menu_padding()}px`;
+            if (width > maxWidth) {
+                maxWidth = width; // Update maxWidth if current item's width is larger
             }
-        }
+            trace_msg(`maxWidth: ${maxWidth}, width: ${width}x`);
+        });
 
-        window.addEventListener('resize', debounce(adjustMenuWidth, 10));
-        // window.addEventListener('resize', adjustMenuWidth);
-        adjustMenuWidth();
+        // Set the menu column width to the maxWidth plus some padding
+        const menuColumn = document.querySelector('#yui-menu-column');
+        if (menuColumn) {
+            menuColumn.style.width = `${maxWidth + get_menu_padding()}px`;
+        }
     }
 
     /************************************************************
@@ -290,11 +287,13 @@
 
         // Get the computed styles for the element
         const menu_item = document.querySelector('#yui-menu-column li a');
-        const styles = window.getComputedStyle(menu_item);
+        if(menu_item) {
+            const styles = window.getComputedStyle(menu_item);
 
-        // Access the padding values
-        padding += parseInt(styles.paddingRight);
-        padding += parseInt(styles.paddingLeft);
+            // Access the padding values
+            padding += parseInt(styles.paddingRight);
+            padding += parseInt(styles.paddingLeft);
+        }
 
         padding += 4; // extra
 
