@@ -89,11 +89,13 @@
         /*---------------------------------------*
          *      Add menu items
          *---------------------------------------*/
-        add_menu_item("EV_HOME", "Home", "fas fa-home", true);
-        add_menu_item("EV_HOME", "Profile", "fas fa-user", false);
-        add_menu_item("EV_HOME", "Messages", "fas fa-envelope", false);
-        add_menu_item("EV_HOME", "Settings", "fas fa-cog", false);
         add_menu_item("EV_HOME", "Home", "fas fa-home", false);
+        add_menu_item("EV_USER", "Profile", "fas fa-user", false);
+        add_menu_item("EV_MESSAGE", "Messages", "fas fa-envelope", false);
+        add_menu_item("EV_SETTING", "Settings", "fas fa-cog", false);
+        add_menu_item("EV_XXX", "Home", "fas fa-home", false);
+
+        set_active_menu_item("EV_USER", true);
     }
 
     /************************************************************
@@ -242,6 +244,20 @@
         adjustMenuWidth();
     }
 
+    /************************************************************
+     *
+     ************************************************************/
+    function set_active_menu_item(id, active)
+    {
+        let item = document.querySelector(`#${id}`);
+        if(item) {
+            if(active) {
+                item.classList.add('is-active');
+            } else {
+                item.classList.remove('is-active');
+            }
+        }
+    }
 
     /************************************************************
      *
