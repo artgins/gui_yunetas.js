@@ -33,8 +33,14 @@
     let trace_creation = 0;
 
     let locales = {
+        /*
+         *  Languages variables are loaded files configured in config.json
+         *      "app/locales/en.js",
+         *      "app/locales/es.js",
+         *      ...
+         */
         en: en,
-        es: es
+        es: es,
     };
 
     /************************************************

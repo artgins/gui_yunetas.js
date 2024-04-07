@@ -89,11 +89,11 @@
         /*---------------------------------------*
          *      Add menu items
          *---------------------------------------*/
-        add_menu_item("EV_HOME", "Home", "fas fa-home", false);
-        add_menu_item("EV_USER", "Profile", "fas fa-user", false);
-        add_menu_item("EV_MESSAGE", "Messages", "fas fa-envelope", false);
-        add_menu_item("EV_SETTING", "Settings", "fas fa-cog", false);
-        add_menu_item("EV_XXX", "Home", "fas fa-home", false);
+        add_menu_item("EV_HOME", t("Home"), "fas fa-home", false);
+        add_menu_item("EV_USER", t("Profile"), "fas fa-user", false);
+        add_menu_item("EV_MESSAGE", t("Messages"), "fas fa-envelope", false);
+        add_menu_item("EV_SETTING", t("Settings"), "fas fa-cog", false);
+        add_menu_item("EV_XXX", t("Home"), "fas fa-home", false);
 
         set_active_menu_item("EV_USER", true);
     }
@@ -280,7 +280,6 @@
             if (width > maxWidth) {
                 maxWidth = width; // Update maxWidth if current item's width is larger
             }
-            trace_msg(`maxWidth: ${maxWidth}, width: ${width}x`);
         });
 
         // Set the menu column width to the maxWidth plus some padding
@@ -338,6 +337,99 @@
         }
         document.documentElement.setAttribute("data-theme", theme);
         $svg.css('display', 'flex');
+    }
+
+    /************************************************************
+     *   Select language
+     ************************************************************/
+    function select_language(self)
+    {
+        var nombre_locales = [];
+        var locales = __yuno__.__default_service__.gobj_read_attr("locales");
+        for (var key in locales) {
+            var obj = {
+                id: key,
+                value: locales[key].nombre
+            };
+            nombre_locales.push(obj);
+        }
+
+        var menu_language = {
+            view: "form",
+            id: "form_language",
+            rows: [
+                {
+                    view: "radio",
+                    name: "language",
+                    options: nombre_locales,
+                    align: "center",
+                    vertical: true
+                },
+                {
+                    margin: 10,
+                    cols: [
+                        {
+                            view: "button",
+                            label: t("cancel"),
+                            css:"webix_tertiary",
+                            width:100,
+                            click: function() {
+                                this.getTopParentView().hide();
+                            }
+                        },
+                        {
+                            view: "button",
+                            label: t("save"),
+                            width: 100,
+                            css: "webix_primary",
+                            click: function() {
+                                this.getTopParentView().hide();
+                                var lng = this.getFormView().elements.language.getValue();
+                                if(lng != kw_get_local_storage_value("locale", null, 0)) {
+                                    i18next.changeLanguage(
+                                        lng,
+                                        function(err, t) {
+                                            if (err) {
+                                                trace_msg('changeLanguage failed: ' + err);
+                                                return;
+                                            }
+                                            var old_lng = kw_set_local_storage_value(
+                                                "locale",
+                                                lng
+                                            );
+                                            if(lng != old_lng) {
+                                                window.location.reload(true);
+                                            }
+                                        }
+                                    );
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
+
+        webix.ui({
+            id: "select_language",
+            view: "window",
+            head: t("language"),
+            position: "center",
+            close: false,
+            modal: true,
+            body: menu_language,
+            on: {
+                "onShow": function(e) {
+                    $$("form_language").setValues(
+                        {
+                            language: kw_get_local_storage_value("locale", null, 0)
+                        }
+                    );
+                    $$("form_language").focus();
+                }
+            }
+        }).hide();
+
     }
 
 
@@ -546,7 +638,7 @@
      ************************************************/
     function ac_change_theme(self, event, kw, src)
     {
-        let current_theme = localStorage.getItem('theme') || 'light';
+        let current_theme = kw_get_local_storage_value("theme", "light", true);
 
         let new_theme;
         switch(current_theme) {
@@ -563,7 +655,7 @@
         }
 
         set_theme(new_theme);
-        localStorage.setItem('theme', new_theme); // Save theme preference
+        kw_set_local_storage_value("theme", new_theme);
 
         return 0;
     }
