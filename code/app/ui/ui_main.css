@@ -29,14 +29,17 @@
  *      Body
  *********************************************************/
 /*
- *  Margins and size of html/body/#root is initially defined in index.mako
+ *  Margins and size of html/body/#root is initially defined in index.mako in this manner
  */
-/*html, body, #root {*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*    width: 100vw;*/
-/*    height: 100vh;*/
-/*}*/
+/*
+html, body, #root {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+}
+*/
+
 
 #root {
     overscroll-behavior: contain;
