@@ -41,6 +41,12 @@
         <div id="root">
         </div>
 
+        % if 'top_js' in assets_env:
+            % for url in assets_env['top_js']:
+        <script src="${url}"></script>
+            % endfor
+        % endif
+
         % if 'module_js' in assets_env:
             % for url in assets_env['module_js']:
         <script type="module" src="${url}"></script>
@@ -53,12 +59,6 @@
                 window.JSONEditor = JSONEditor;
             }
         </script>
-
-        % if 'top_js' in assets_env:
-            % for url in assets_env['top_js']:
-        <script src="${url}"></script>
-            % endfor
-        % endif
 
         % if 'bottom_js' in assets_env:
             % for url in assets_env['bottom_js']:
