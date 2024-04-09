@@ -15,6 +15,17 @@
             % endif
         % endfor
 
+        <style>
+            body,
+            html,
+            #root {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+
         % if 'css' in assets_env:
             % for url in assets_env['css']:
         <link rel="stylesheet" href="${url}">
@@ -40,13 +51,20 @@
             % endfor
         % endif
 
+    </head>
+    <body>
+        <div id="loading-message"
+            style="border: 1px solid blue; margin: 1em; padding: 2em; background-color: #f8f1fd;">
+            <strong>Loading application. Wait please...</strong>
+        </div>
+        <div id="root">
+        </div>
+
         % if 'bottom_js' in assets_env:
             % for url in assets_env['bottom_js']:
         <script src="${url}"></script>
             % endfor
         % endif
 
-    </head>
-    <body>
     </body>
 </html>
