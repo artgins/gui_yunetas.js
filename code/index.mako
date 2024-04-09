@@ -32,6 +32,15 @@
             % endfor
         % endif
 
+    </head>
+    <body>
+        <div id="loading-message"
+            style="border: 1px solid blue; margin: 2em; padding: 2em; background-color: #f8f1fd;">
+            <strong>Loading application. Wait please...</strong>
+        </div>
+        <div id="root">
+        </div>
+
         % if 'module_js' in assets_env:
             % for url in assets_env['module_js']:
         <script type="module" src="${url}"></script>
@@ -50,15 +59,6 @@
         <script src="${url}"></script>
             % endfor
         % endif
-
-    </head>
-    <body>
-        <div id="loading-message"
-            style="border: 1px solid blue; margin: 2em; padding: 2em; background-color: #f8f1fd;">
-            <strong>Loading application. Wait please...</strong>
-        </div>
-        <div id="root">
-        </div>
 
         % if 'bottom_js' in assets_env:
             % for url in assets_env['bottom_js']:
