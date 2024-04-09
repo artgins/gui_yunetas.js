@@ -83,6 +83,11 @@
     );
 
     window.addEventListener('load', function() {
+        /*
+         *  Delete message "Loading application. Wait please..."
+         */
+        document.getElementById("loading-message").remove();
+
         let kw_main = {
             locales: locales
         };
