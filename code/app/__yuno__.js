@@ -112,7 +112,7 @@
     });
 
     document.addEventListener('DOMContentLoaded', () => {
-        // Initialize theme on load
+        // Initialize bulma theme on load
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute("data-theme", savedTheme);
     });
