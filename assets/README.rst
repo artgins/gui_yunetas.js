@@ -22,7 +22,7 @@ And to install the new versions::
 Errors
 ------
 
-in jsoneditor/themes/defaults.scss remove the last 90::
+in node_modules/vanilla-jsoneditor/themes/defaults.scss remove the last 122::
 
     $search-match-background-color: var(--jse-search-match-background-color, #99ff7780);
 
